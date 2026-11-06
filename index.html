@@ -260,6 +260,13 @@ body.mopen{overflow:hidden}
 @media (max-width:600px){.mrow.kv3{grid-template-columns:minmax(0,1fr) auto}.mrow.kv3 .v{grid-column:1 / -1;order:3}.mrow.n2{grid-template-columns:minmax(0,1fr) auto}.mrow.n2 .l{grid-column:1 / -1;order:3}}
 .card .acts .ed.go.dng{border-color:var(--s-nao);color:var(--s-nao)}
 .item .ed+.ed{margin-left:0}
+.cklist{border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:13.5px}
+.cklist summary{cursor:pointer;color:var(--accent);font-weight:600}
+.mini{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 10px;padding:8px 0;border-top:1px solid var(--line);margin-top:8px}
+.mini .md{display:grid;gap:2px;min-width:0;overflow-wrap:anywhere}
+.mini .mb{grid-column:1 / -1;display:flex;flex-wrap:wrap}
+.mini .mb .ed{margin:0 6px 0 0}
+.mini .stsel{font-size:12px}
 </style>
 
 <div class="wrap lockbox" id="lock"><h1>Colações de fim de ano 2026</h1>
@@ -489,7 +496,7 @@ return {conv,fc,capt};
 }
 
 /* ---------- estado da tela ---------- */
-const S = {tab:'colacoes', q:'', group:'Todas', status:'Todos', cat:'Todas', urg:false, sort:'planilha', trash:false};
+const S = {tab:'colacoes', q:'', group:'Todas', status:'Todos', cat:'Todas', urg:false, sort:'planilha', trash:false, open:{}};
 const TABS = [['colacoes','Colações'],['checklist','Checklist'],['festiva','Festiva Medicina'],['capacidade','Capacidade'],['orientacoes','Orientações']];
 
 /* ---------- filtros ---------- */
@@ -563,6 +570,12 @@ return `<div><div class="statusbar" title="Status dos ${items.length} itens do c
 <div class="note">${items.length} itens: ${segs.filter(s=>s.n).map(s=>s.n+' '+s.k.toLowerCase()).join(' · ')}</div></div>`;
 }
 const whoLine = (x,verb) => x.dirty ? `<p class="ref">${esc(verb||'Alterado')} por ${esc(who(x.by))} em ${fmtAt(x.at)}</p>` : '';
+function cardChecklist(c){
+const items = CHK.filter(i=>i.groups.includes(c.key));
+const open = S.open[c.key] ? ' open' : '';
+const rows = items.map(i=>`<div class="mini"><div class="ms">${statusSelect(i.status,{cls:sCls(i.status),data:`data-l="${i.l}" data-f="status"`},STATUS.map(s=>s.k).filter(k=>k!=='Orientação informada'))}</div><div class="md"><span>${hl(i.dem)}</span><span class="note">${hl(i.cat)} · Prazo: ${hl(i.prazo)}${i.resp?' · '+hl(i.resp):''}</span></div><div class="mb">${edBtn('edit','chk',i.l,'Editar')}${edBtn('del','chk',i.l,'Apagar','dng')}</div></div>`).join('');
+return `<details class="cklist" data-ck="${esc(c.key)}"${open}><summary>Checklist desta colação (${items.length})</summary>${rows||'<p class="note">Nenhuma atividade ainda.</p>'}${ED()?`<button type="button" class="ed add" data-act="newin" data-k="chk" data-id="${esc(c.key)}">+ Nova atividade</button>`:''}</details>`;
+}
 function renderCard(c){
 const k = calc(c);
 const days = daysTo(c.quando);
@@ -576,7 +589,7 @@ const nums = (boxes.length ? `<div class="nums">${boxes.map(([a,b])=>`<div><b>${
 + (k.capt!=null ? `<div class="note">Capacidade estimada com ${fmt(c.inst||0)} convidados institucionais: <b>${fmt(k.capt)}</b> pessoas.</div>` : '');
 const full = c.obs ? `<details><summary>${esc(c.obsT||'Observações')}</summary><p>${hl(c.obs)}</p></details>` : '';
 const attn = c.attn.length ? `<ul class="attn">${c.attn.map(a=>`<li>${hl(a)}</li>`).join('')}</ul>` : '';
-return `<article class="card"><h3>${hl(c.nome)}</h3><div class="when">${when}</div>${kv}${nums}${attn}${miniStatus(c.key)}${full}${whoLine(c,c.novo?'Criada/alterada':'Editada')}
+return `<article class="card"><h3>${hl(c.nome)}</h3><div class="when">${when}</div>${kv}${nums}${attn}${miniStatus(c.key)}${cardChecklist(c)}${full}${whoLine(c,c.novo?'Criada/alterada':'Editada')}
 <div class="acts"><button class="go" data-go="${esc(c.key)}">Ver checklist desta colação</button><button class="go pdf" data-pdf="${esc(c.key)}">Gerar PDF da colação</button>${edBtn('edit','card',c.id,'Editar ficha','go')}${ED()?`<button type="button" class="ed go" data-act="newin" data-k="chk" data-id="${esc(c.key)}">+ Nova atividade</button>`:''}${edBtn('del','card',c.id,'Apagar colação','go dng')}</div></article>`;
 }
 function renderTrashCard(c){
@@ -935,6 +948,7 @@ if(t.dataset && t.dataset.fi){ const f=byF.get(+t.dataset.fi); if(f) saveFes(f,t
 if(t.id==='cat'){S.cat=t.value;render();}
 if(t.id==='sort'){S.sort=t.value;render();}
 });
+document.addEventListener('toggle',e=>{ const t=e.target; if(t.dataset&&t.dataset.ck) S.open[t.dataset.ck]=t.open; },true);
 document.addEventListener('keydown', e=>{ if(e.key==='Escape' && MCFG) closeForm(); });
 window.addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(TABS.some(t=>t[0]===h)){S.tab=h;S.trash=false;render();}});
 {const h=location.hash.slice(1); if(TABS.some(t=>t[0]===h)) S.tab=h;}
