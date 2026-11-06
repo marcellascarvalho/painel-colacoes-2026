@@ -109,7 +109,7 @@ h2{font-family:var(--font-d);font-size:22px;margin:0 0 4px}
 .kv dd{margin:0;min-width:0;overflow-wrap:anywhere}
 .copy{border:1px solid var(--line);background:var(--surface-2);border-radius:6px;padding:0 7px;margin-left:6px;font-size:12px;cursor:pointer;color:var(--muted)}
 .copy:hover{color:var(--fg);border-color:var(--accent)}
-.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-block:10px}
+.nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:8px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-block:10px}
 .nums div{min-width:0}
 .nums b{display:block;font-family:var(--font-d);font-size:20px;line-height:1.1;font-variant-numeric:tabular-nums}
 .nums span{font-size:11.5px;color:var(--muted);line-height:1.2;display:block}
@@ -181,7 +181,6 @@ tr.total td{font-weight:600;background:var(--surface-2)}
 .go2{font:inherit;font-weight:600;padding:9px 18px;border-radius:8px;border:0;background:var(--accent);color:var(--accent-ink);cursor:pointer}
 @media (max-width:760px){
 .item{grid-template-columns:minmax(0,1fr)}
-.nums{grid-template-columns:repeat(2,1fr)}
 .frow>label{min-width:100%}
 }
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
@@ -216,6 +215,49 @@ body::before{display:none!important}
 .userbar b{color:var(--fg);font-weight:600}
 .outbtn{font:inherit;font-size:13.5px;font-weight:600;padding:6px 14px;border-radius:8px;border:1.5px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer}
 .outbtn:hover{background:var(--accent);color:var(--accent-ink)}
+
+/* edição de conteúdo */
+.ed{font:inherit;font-size:12.5px;font-weight:600;padding:3px 10px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--accent);cursor:pointer;margin:6px 6px 0 0}
+.ed:hover{border-color:var(--accent)}
+.ed.add{border-color:var(--accent)}
+.mf .ed.add{justify-self:start}
+.ed.dng,.dng{color:var(--s-nao)}
+h1 .ed,header p .ed,.lead .ed,.note .ed,h2 .ed,td .ed{margin:0 0 0 8px;font-size:11.5px;padding:1px 8px;vertical-align:middle}
+.tbar{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin:0 0 12px}
+.tbar .ed{margin:0;font-size:13.5px;padding:6px 14px}
+.card .acts .go.dng{border-color:var(--s-nao);color:var(--s-nao)}
+.card .acts .ed.go{border-width:1.5px;border-radius:8px;padding:7px 14px;font-size:inherit;margin:0;background:transparent;color:var(--accent);border-color:var(--accent)}
+.card.off,.item.off,.fcard.off,.orirow.off{opacity:.72;border-style:dashed}
+.fact{display:flex;flex-wrap:wrap;gap:0 6px;margin-top:auto}
+.orilist .orirow{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
+.orilist .orirow p{margin:0;border:0;padding:0;background:none;min-width:0;overflow-wrap:anywhere}
+.oact{flex:none;display:flex;flex-wrap:wrap}
+.oact .ed{margin:0 0 0 6px}
+body.mopen{overflow:hidden}
+.mback{position:fixed;inset:0;z-index:50;background:rgba(6,20,24,.55);display:flex;align-items:flex-start;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) 16px 16px;overflow-y:auto}
+.modal{background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:14px;width:min(680px,100%);padding:20px;display:grid;gap:14px;margin-block:auto}
+.modal h2{margin:0}
+.modal .note{margin:0}
+.mbody{display:grid;gap:14px}
+.mf{display:grid;gap:4px;min-width:0;border:0;padding:0;margin:0}
+.ml{font-size:12.5px;font-weight:600;color:var(--muted);text-transform:none;letter-spacing:0}
+.mh{font-size:12px;color:var(--muted)}
+.mf input[type=text],.mf textarea,.mf select{font:inherit;font-size:15px;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);width:100%;min-width:0}
+.mf textarea{resize:vertical}
+.mchk{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:6px 12px}
+.mchk label{display:flex;gap:8px;align-items:center;font-size:14px}
+.mrows{display:grid;gap:8px}
+.mrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:start}
+.mrow.kv3{grid-template-columns:minmax(0,1fr) minmax(0,1.6fr) auto auto}
+.mrow.n2{grid-template-columns:minmax(0,.7fr) minmax(0,1.6fr) auto}
+.mrow .cp{display:flex;gap:4px;align-items:center;font-size:13px;color:var(--muted);padding-top:8px}
+.mrm{border:1px solid var(--line);background:var(--surface-2);border-radius:8px;width:34px;height:34px;cursor:pointer;font-size:18px;line-height:1;color:var(--muted)}
+.mrm:hover{color:var(--s-nao);border-color:var(--s-nao)}
+.mfoot{display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-top:1px solid var(--line);padding-top:14px}
+.mfoot .sp{flex:1}
+.mfoot .dng{border-color:var(--s-nao)}
+.merr{margin:0;font-weight:600}
+@media (max-width:600px){.mrow.kv3{grid-template-columns:minmax(0,1fr) auto}.mrow.kv3 .v{grid-column:1 / -1;order:3}.mrow.n2{grid-template-columns:minmax(0,1fr) auto}.mrow.n2 .l{grid-column:1 / -1;order:3}}
 </style>
 
 <div class="wrap lockbox" id="lock"><h1>Colações de fim de ano 2026</h1>
@@ -227,8 +269,8 @@ body::before{display:none!important}
 <div class="userbar" id="userbar" hidden><span id="whoami"></span><button class="outbtn" type="button" data-logout="1">Sair / trocar de usuário</button></div>
 <header class="top">
 <div>
-<h1>Colações de fim de ano 2026</h1>
-<p>Todas as informações da planilha de acompanhamento em um só lugar. Digite na busca para encontrar qualquer nome, data, fornecedor ou pendência.</p>
+<h1 id="htitle">Colações de fim de ano 2026</h1>
+<p id="hsub">Todas as informações da planilha de acompanhamento em um só lugar. Digite na busca para encontrar qualquer nome, data, fornecedor ou pendência.</p>
 </div>
 <div class="totals" id="totals"></div>
 </header>
@@ -245,6 +287,7 @@ body::before{display:none!important}
 <main id="view" aria-live="polite"></main>
 </div>
 
+<div class="mback" id="modal" hidden></div>
 <div id="report" aria-hidden="true"></div>
 <script>
 (function(){
@@ -284,7 +327,8 @@ window.addEventListener('DOMContentLoaded',()=>{ if(g('col_code')&&g('col_name')
 <script>
 window.__boot=function(DATA,NAME0,CODE0){
 
-const K=DATA.dict; DATA.chk=DATA.rows.map(r=>({l:r[0],turma:K.turma[r[1]],dt:K.dt[r[2]],etapa:K.etapa[r[3]],cat:K.cat[r[4]],dem:r[5],prazo:K.prazo[r[6]],status:K.status[r[7]],orig:K.orig[r[8]]||null}));
+const K=DATA.dict;
+const BASE_CHK=DATA.rows.map(r=>({l:r[0],turma:K.turma[r[1]],dt:K.dt[r[2]],etapa:K.etapa[r[3]],cat:K.cat[r[4]],dem:r[5],prazo:K.prazo[r[6]],status:K.status[r[7]],orig:K.orig[r[8]]||null}));
 
 /* ---------- utilidades ---------- */
 const $ = s => document.querySelector(s);
@@ -303,12 +347,15 @@ return t.split(re).map((p,i)=> i%2 ? '<mark>'+esc(p)+'</mark>' : esc(p)).join(''
 const matches = hay => terms.every(t => hay.includes(t));
 const short = s => String(s||'').replace(/ \(2º\/2026\)/g,'');
 const fmt = n => (n==null||n==='' ) ? '—' : (typeof n==='number' ? n.toLocaleString('pt-BR') : n);
+const isNum = v => typeof v==='number' && isFinite(v);
+const num = v => { if(v===null||v===undefined||v==='') return null; if(typeof v==='number') return isFinite(v)?v:null; const n=Number(String(v).trim().replace(/\./g,'').replace(',','.')); return isFinite(n)?n:null; };
+const uniq = a => [...new Set(a.filter(Boolean))].sort((x,y)=>x.localeCompare(y,'pt'));
 
-/* ---------- dados derivados ---------- */
-const GROUPS = ['Fisioterapia','Enfermagem','Psicologia','Medicina manhã','Medicina tarde','Medicina festiva'];
+/* ---------- dados originais da planilha ---------- */
+const GROUPS_BASE = ['Fisioterapia','Enfermagem','Psicologia','Medicina manhã','Medicina tarde','Medicina festiva'];
 function groupsOf(t){
 t = t||'';
-if(/^Todas/.test(t)) return [...GROUPS];
+if(/^Todas/.test(t)) return [...GROUPS_BASE];
 const g = new Set();
 if(t.includes('Fisioterapia')) g.add('Fisioterapia');
 if(t.includes('Enfermagem')) g.add('Enfermagem');
@@ -330,62 +377,154 @@ const STATUS = [
 const sCls = k => (STATUS.find(s=>s.k===k)||{c:'ori'}).c;
 const URG_PRAZO = ['Imediato','Prioridade alta'];
 const isUrg = it => it.etapa==='Prioridade máxima' || URG_PRAZO.includes(it.prazo) || /^Próximos 15 dias/.test(it.prazo||'');
+const FES_OPTS = ['Confirmado','Pendente','Em andamento','Aprovado','Não aprovada','A verificar'];
 
-const CHK = DATA.chk.map(it=>({...it, st0:it.status, groups:groupsOf(it.turma), resp:'', lim:'', nota:'', by:null, at:null, dirty:false}));
-const rehay = it => { it.hay = norm([it.turma,it.dt,it.etapa,it.cat,it.dem,it.prazo,it.status,it.orig,it.resp,it.nota,'linha '+it.l].join(' | ')); };
-CHK.forEach(rehay);
-const byL = new Map(CHK.map(i=>[i.l,i]));
-const FES = DATA.fes.map((r,i)=>({i,tema:r[0],info:r[1],st:r[2],st0:r[2],obs:r[3],by:null,at:null,dirty:false,hay:norm(r.join(' | '))}));
-const rehayF = f => { f.hay = norm([f.tema,f.info,f.st,f.obs].join(' | ')); };
-const CAP = DATA.cap.map(r=>({a:r[0],b:r[1],c:r[2],d:r[3],e:r[4],f:r[5],g:r[6],h:r[7],hay:norm(r.join(' | '))}));
-const ORI = DATA.ori.map(t=>({t, hay:norm(t)}));
+const BASE_FES = DATA.fes.map((r,i)=>({id:i,tema:r[0],info:r[1],st:r[2],obs:r[3]}));
+const BASE_ORI = DATA.ori.map((t,i)=>({id:i,t}));
 
-/* cartões das colações: dados da planilha + pontos de atenção copiados das observações */
-const CARDS = [
-{g:'Fisioterapia', ov:0, cap:0, attn:[
+const contato = o => [{k:'Presidente',v:o[1]||'não informado',c:0},{k:'Telefone',v:o[2]||'',c:1},{k:'E-mail',v:o[3]||'',c:1},{k:'Comissão',v:o[4]||'não informado',c:1}];
+function cardBase(id,key,capi,attn){
+const o = DATA.ov[id], cp = DATA.cap[capi];
+return {id,key,rot:key,capNome:cp[0],nome:short(o[0]),quando:o[6],
+kv:[...contato(o),...(o[7]?[{k:'Festiva',v:o[7],c:0}]:[])],
+form:o[5],cpf:o[9],inst:20,nums:[],obsT:'Observações completas da planilha',obs:o[8],attn,capObs:cp[7]};
+}
+const BASE_CARDS = [
+cardBase(0,'Fisioterapia',0,[
 'Local, comissão, dados da festiva, homenageados, discursos e fornecedores não constam da planilha.',
-'Orçamento Sericol prevê 7 becas para 16/12; confirmar a distribuição entre as duas cerimônias do dia.']},
-{g:'Enfermagem', ov:1, cap:1, attn:[
+'Orçamento Sericol prevê 7 becas para 16/12; confirmar a distribuição entre as duas cerimônias do dia.']),
+cardBase(1,'Enfermagem',1,[
 'Divergência: 25 nomes na relação anexa × 27 na planilha-base anterior.',
-'E-mail do Registro Acadêmico: 9 convites por formando. O registro anterior dizia 8 convidados (263); validar.']},
-{g:'Psicologia', ov:2, cap:2, attn:[
+'E-mail do Registro Acadêmico: 9 convites por formando. O registro anterior dizia 8 convidados (263); validar.']),
+cardBase(2,'Psicologia',2,[
 'Proposta de cerimonial BST localizada; falta decisão de contratação.',
 'Repertório enviado para verificação de direitos autorais.',
-'Orçamento Sericol: 7 becas para 17/12; confirmar contratação e validade.']},
-{g:'Medicina manhã', ov:3, cap:3, attn:[
+'Orçamento Sericol: 7 becas para 17/12; confirmar contratação e validade.']),
+cardBase(3,'Medicina manhã',3,[
 'Correspondência CARIMBOALUNO A = manhã ainda precisa ser confirmada com o Registro Acadêmico.',
-'Pendências enviadas por WhatsApp em 04/11: aluna da Turma 74, quantitativos por turno, convites excedentes, representante institucional, canudo e fotografia.']},
-{g:'Medicina tarde', ov:4, cap:4, attn:[
+'Pendências enviadas por WhatsApp em 04/11: aluna da Turma 74, quantitativos por turno, convites excedentes, representante institucional, canudo e fotografia.']),
+cardBase(4,'Medicina tarde',4,[
 'Correspondência CARIMBOALUNO B = tarde ainda precisa ser confirmada com o Registro Acadêmico.',
-'A aluna Fernanda Gonçalves Paiva de Lima Vieira (Turma 74) pediu para participar desta colação; não alterar a contagem antes da validação.']},
-{g:'Medicina festiva', ov:null, cap:5, attn:[
+'A aluna Fernanda Gonçalves Paiva de Lima Vieira (Turma 74) pediu para participar desta colação; não alterar a contagem antes da validação.']),
+{id:5,key:'Medicina festiva',rot:'Medicina festiva',capNome:DATA.cap[5][0],nome:'Medicina — 75 — colação festiva',quando:'18/12/2026 — Expominas (Pavilhões 1 e 2)',
+kv:[{k:'Horário',v:'A confirmar: 20h na reunião, 19h no registro anterior',c:0},{k:'Equipe',v:'Chegada entre 16h e 17h',c:0},{k:'Formandos',v:'Chegada às 17h',c:0},{k:'Autoridades',v:'Até 19h',c:0}],
+form:null,cpf:null,inst:20,nums:[{v:'≈ 4.000',l:'público estimado (não validado)'},{v:'17',l:'integrantes previstos na mesa solene'}],
+obsT:'Alinhamentos da reunião',obs:'Veja os alinhamentos na aba “Festiva Medicina”.',capObs:DATA.cap[5][7],
+attn:[
 'Horário: 20h (reunião) × 19h (registro anterior).',
 'Público de cerca de 4.000 pessoas não está validado e não é capacidade calculada.',
-'Sem quantitativo de formandos nem de convites por formando para a festiva.']},
+'Sem quantitativo de formandos nem de convites por formando para a festiva.']}
 ];
 
-/* ---------- estado ---------- */
-const S = {tab:'colacoes', q:'', group:'Todas', status:'Todos', cat:'Todas', urg:false, sort:'planilha'};
+/* textos da página que podem ser editados (id → rótulo e texto padrão) */
+const TXT_DEF = {
+10:{l:'Título do painel',v:'Colações de fim de ano 2026'},
+11:{l:'Subtítulo do painel',v:'Todas as informações da planilha de acompanhamento em um só lugar. Digite na busca para encontrar qualquer nome, data, fornecedor ou pendência.'},
+9:{l:'Título da aba Colações',v:'Colações'},
+1:{l:'Apresentação da aba Colações',v:'Uma ficha por turma ou turno, com contatos, números e pontos que precisam de confirmação.'},
+8:{l:'Título da aba Checklist',v:'Checklist de demandas'},
+2:{l:'Título da aba Festiva',v:'Colação festiva — Medicina 75'},
+3:{l:'Apresentação da aba Festiva',v:'Expominas, Pavilhões 1 e 2, em 18/12/2026. Síntese da reunião de alinhamento; o que não foi confirmado continua como pendência.'},
+4:{l:'Apresentação da aba Capacidade',v:'Capacidade = formandos + convites por formando + convidados institucionais por colação (20 por padrão). A festiva de Medicina não tem capacidade calculada.'},
+5:{l:'Nota no fim da aba Capacidade',v:'“Formandos + convites” (aba Colações) não inclui os convidados institucionais. Por isso Medicina manhã aparece como 330 lá e 350 aqui.'},
+12:{l:'Observação da linha de total (Capacidade)',v:DATA.cap[6][7]},
+6:{l:'Título da aba Orientações',v:'Orientações de uso da planilha'},
+7:{l:'Apresentação da aba Orientações',v:'Regras de preenchimento e avisos que acompanham o arquivo.'}
+};
+
+/* ---------- estado compartilhado (sobreposições gravadas no banco) ---------- */
+let OV = {chk:{},fes:{},ori:{},card:{},txt:{}};
+let ALLCARDS=[],CARDS=[],GROUPS=[],GL={},ALLCHK=[],CHK=[],byId=new Map(),ALLFES=[],FES=[],byF=new Map(),ALLORI=[],ORI=[],byO=new Map();
+const T = id => { const o=OV.txt[id]; return (o&&typeof o.d.v==='string'&&o.d.v!=='') ? o.d.v : TXT_DEF[id].v; };
+const gl = k => GL[k] || k;
+
+function ovGet(kind,id,fields,base){
+const o = OV[kind][id], d = o ? o.d : {};
+const x = {...base, dirty:!!o, by:o?o.by:null, at:o?o.at:null};
+fields.forEach(f=>{ if(f in d && d[f]!==null) x[f]=d[f]; });
+x.hid = !!x.hid;
+return x;
+}
+const newIds = kind => Object.keys(OV[kind]).filter(k=>+k>=1000).map(Number);
+const byOrd = (a,b)=>((a.ord||0)-(b.ord||0))||(a.id-b.id);
+
+function rebuild(){
+/* fichas */
+const cf = ['rot','nome','quando','kv','form','cpf','inst','nums','obsT','obs','attn','capObs','hid','ord'];
+const bc = BASE_CARDS.map(b=>ovGet('card',b.id,cf,b));
+const nc = newIds('card').map(id=>ovGet('card',id,cf,{id,key:'n'+id,novo:true,rot:'',nome:'',quando:'',kv:[],form:null,cpf:null,inst:20,nums:[],obsT:'Observações',obs:'',attn:[],capObs:''})).sort(byOrd);
+ALLCARDS = [...bc,...nc].map(c=>{ c.kv=Array.isArray(c.kv)?c.kv:[]; c.nums=Array.isArray(c.nums)?c.nums:[]; c.attn=Array.isArray(c.attn)?c.attn:[]; c.form=num(c.form); c.cpf=num(c.cpf); c.inst=num(c.inst); c.rot=c.rot||c.nome; return c; });
+CARDS = ALLCARDS.filter(c=>!c.hid); GROUPS = CARDS.map(c=>c.key); GL = {}; ALLCARDS.forEach(c=>{GL[c.key]=c.rot;});
+/* checklist */
+const kf = ['status','resp','lim','nota','dem','prazo','cat','etapa','dt','orig','groups','hid','ord'];
+const bi = BASE_CHK.map(b=>{ const it=ovGet('chk',b.l,kf,{...b,id:b.l,st0:b.status,global:/^Todas/.test(b.turma),groups:groupsOf(b.turma),resp:'',lim:'',nota:''}); it.custGroups=!!(OV.chk[b.l]&&Array.isArray(OV.chk[b.l].d.groups)); return it; });
+const ni = newIds('chk').map(id=>{ const it=ovGet('chk',id,kf,{l:id,id,novo:true,turma:'',dt:'',etapa:'',cat:'',dem:'',prazo:'',status:'Não iniciado',st0:'Não iniciado',orig:null,groups:[],resp:'',lim:'',nota:''}); it.custGroups=true; return it; }).sort(byOrd);
+ALLCHK = [...bi,...ni].map(it=>{
+it.l = it.id; it.resp=it.resp||''; it.lim=it.lim||''; it.nota=it.nota||''; it.orig=it.orig||null; it.groups=Array.isArray(it.groups)?it.groups:[];
+it.turmaLbl = (it.novo||it.custGroups) ? (it.groups.length>=GROUPS.length&&GROUPS.length>1?'Todas as colações':it.groups.map(gl).join(', ')) : short(it.turma);
+it.hay = norm([it.turmaLbl,it.dt,it.etapa,it.cat,it.dem,it.prazo,it.status,it.orig,it.resp,it.nota,it.novo?'item adicionado':'linha '+it.l].join(' | '));
+return it; });
+CHK = ALLCHK.filter(i=>!i.hid); byId = new Map(ALLCHK.map(i=>[i.id,i]));
+/* festiva */
+const ff = ['tema','info','st','obs','hid','ord'];
+const bf = BASE_FES.map(b=>ovGet('fes',b.id,ff,{...b,st0:b.st}));
+const nf = newIds('fes').map(id=>ovGet('fes',id,ff,{id,novo:true,tema:'',info:'',st:'Pendente',st0:'Pendente',obs:''})).sort(byOrd);
+ALLFES = [...bf,...nf].map(f=>{ f.hay=norm([f.tema,f.info,f.st,f.obs].join(' | ')); return f; });
+FES = ALLFES.filter(f=>!f.hid); byF = new Map(ALLFES.map(f=>[f.id,f]));
+/* orientações */
+const of_ = ['t','hid','ord'];
+const bo = BASE_ORI.map(b=>ovGet('ori',b.id,of_,b));
+const no = newIds('ori').map(id=>ovGet('ori',id,of_,{id,novo:true,t:''})).sort(byOrd);
+ALLORI = [...bo,...no].map(o=>{ o.hay=norm(o.t); return o; });
+ORI = ALLORI.filter(o=>!o.hid); byO = new Map(ALLORI.map(o=>[o.id,o]));
+if(S.group!=='Todas' && !GROUPS.includes(S.group)) S.group='Todas';
+}
+function calc(c){
+const conv = (isNum(c.form)&&isNum(c.cpf)) ? c.form*c.cpf : null;
+const fc = isNum(c.form) ? c.form+(conv||0) : null;
+const capt = fc!=null ? fc+(isNum(c.inst)?c.inst:0) : null;
+return {conv,fc,capt};
+}
+
+/* ---------- estado da tela ---------- */
+const S = {tab:'colacoes', q:'', group:'Todas', status:'Todos', cat:'Todas', urg:false, sort:'planilha', trash:false};
 const TABS = [['colacoes','Colações'],['checklist','Checklist'],['festiva','Festiva Medicina'],['capacidade','Capacidade'],['orientacoes','Orientações']];
 
 /* ---------- filtros ---------- */
+const chkPool = () => S.trash ? ALLCHK.filter(i=>i.hid) : CHK;
 function filterChk(ignore){
-return CHK.filter(it=>
+return chkPool().filter(it=>
 matches(it.hay) &&
 (ignore==='group' || S.group==='Todas' || it.groups.includes(S.group)) &&
 (ignore==='status' || S.status==='Todos' || it.status===S.status) &&
 (S.cat==='Todas' || it.cat===S.cat) &&
 (!S.urg || isUrg(it)));
 }
-const filtFes = () => FES.filter(x=>matches(x.hay));
-const filtCap = () => CAP.filter(x=>matches(x.hay));
-const filtOri = () => ORI.filter(x=>matches(x.hay));
+const filtFes = () => (S.trash?ALLFES.filter(f=>f.hid):FES).filter(x=>matches(x.hay));
+const filtOri = () => (S.trash?ALLORI.filter(o=>o.hid):ORI).filter(x=>matches(x.hay));
+function capRows(){
+const rows = CARDS.map(c=>{ const k=calc(c); return {a:c.capNome||c.nome,b:c.quando,c:c.form,d:c.cpf,e:k.conv,f:c.inst,g:k.capt,h:c.capObs}; });
+const w = CARDS.filter(c=>isNum(c.form)); const ks = w.map(calc);
+const sum = a => a.reduce((s,x)=>s+(x||0),0);
+const total = {a:'TOTAL — colações com formandos informados',b:null,c:sum(w.map(c=>c.form)),d:'—',e:sum(ks.map(k=>k.conv)),f:sum(w.map(c=>c.inst)),g:sum(ks.map(k=>k.capt)),h:T(12),total:true};
+return [...rows,total].map(r=>({...r,hay:norm([r.a,r.b,r.c,r.d,r.e,r.f,r.g,r.h].join(' | '))}));
+}
+const filtCap = () => capRows().filter(x=>matches(x.hay));
 
 /* ---------- renderização ---------- */
+const ED = () => !!(CAN && DB);
+const edBtn = (act,k,id,label,cls) => ED() ? `<button type="button" class="ed ${cls||''}" data-act="${act}" data-k="${k}" data-id="${id}">${label}</button>` : '';
+const txtBtn = id => ED() ? ` <button type="button" class="ed" data-act="txt" data-id="${id}">editar texto</button>` : '';
+function trashBar(kind, n, addLabel){
+const add = ED()&&!S.trash ? `<button type="button" class="ed add" data-act="new" data-k="${kind}">+ ${addLabel}</button>` : '';
+const tr = n||S.trash ? `<button type="button" class="linkbtn" data-act="trash">${S.trash?'← Voltar à lista':'Ver removidos ('+n+')'}</button>` : '';
+return `<div class="tbar">${add}${tr}</div>`;
+}
 function renderTotals(){
 const open = CHK.filter(i=>!['Concluído','Orientação informada','Não se aplica'].includes(i.status)).length;
-const t = [[DATA.ov.reduce((s,r)=>s+r[5],0),'possíveis formandos'],
-[DATA.ov.reduce((s,r)=>s+r[11],0),'convites estimados'],
+const ks = CARDS.map(calc);
+const t = [[CARDS.reduce((s,c)=>s+(c.form||0),0),'possíveis formandos'],
+[ks.reduce((s,k)=>s+(k.conv||0),0),'convites estimados'],
 [CHK.length,'itens no checklist'],
 [open,'itens em aberto']];
 $('#totals').innerHTML = t.map(([n,l])=>`<div class="tot"><b>${fmt(n)}</b><span>${l}</span></div>`).join('');
@@ -394,16 +533,15 @@ function renderTabs(){
 const cnt = {
 colacoes: CARDS.filter(cardMatch).length,
 checklist: CHK.filter(i=>matches(i.hay)).length,
-festiva: filtFes().length,
+festiva: FES.filter(x=>matches(x.hay)).length,
 capacidade: filtCap().length,
-orientacoes: filtOri().length};
+orientacoes: ORI.filter(x=>matches(x.hay)).length};
 $('#tabs').innerHTML = TABS.map(([k,l])=>
 `<button class="tab ${terms.length&&!cnt[k]?'zero':''}" role="tab" aria-selected="${S.tab===k}" data-tab="${k}">${l}<span class="n">${cnt[k]}</span></button>`).join('');
 }
 function cardHay(c){
-const o = c.ov!=null ? DATA.ov[c.ov] : [];
-const p = CAP[c.cap];
-return norm([c.g, o.join(' '), p?p.hay:'', c.attn.join(' ')].join(' | '));
+const k = calc(c);
+return norm([c.nome,c.rot,c.quando,c.kv.map(r=>r.k+' '+r.v).join(' '),c.nums.map(n=>n.v+' '+n.l).join(' '),c.form,c.cpf,k.conv,k.fc,k.capt,c.obs,c.attn.join(' '),c.capObs].join(' | '));
 }
 const cardMatch = c => !terms.length || matches(cardHay(c));
 
@@ -416,43 +554,32 @@ return diff>1 ? `em ${diff} dias` : diff===1 ? 'amanhã' : diff===0 ? 'hoje' : '
 }
 function miniStatus(g){
 const items = CHK.filter(i=>i.groups.includes(g));
+if(!items.length) return `<div class="note">Nenhum item no checklist desta colação ainda.</div>`;
 const tot = items.length||1;
 const segs = STATUS.map(s=>({...s,n:items.filter(i=>i.status===s.k).length}));
 return `<div><div class="statusbar" title="Status dos ${items.length} itens do checklist">${segs.filter(s=>s.n).map(s=>`<i class="c-${s.c}" style="width:${s.n/tot*100}%"></i>`).join('')}</div>
 <div class="note">${items.length} itens: ${segs.filter(s=>s.n).map(s=>s.n+' '+s.k.toLowerCase()).join(' · ')}</div></div>`;
 }
+const whoLine = (x,verb) => x.dirty ? `<p class="ref">${esc(verb||'Alterado')} por ${esc(who(x.by))} em ${fmtAt(x.at)}</p>` : '';
 function renderCard(c){
-const o = c.ov!=null ? DATA.ov[c.ov] : null;
-const p = CAP[c.cap];
-let title, when, kv='', nums='', full='';
-if(o){
-title = short(o[0]);
-when = `<b>${hl(o[6])}</b><span class="days">${daysTo(o[6])}</span>`;
-const pres = o[1] ? `${hl(o[1])}` : '<span class="note">não informado</span>';
-kv = `<dl class="kv"><dt>Presidente</dt><dd>${pres}</dd>
-<dt>Telefone</dt><dd>${o[2]?hl(o[2])+copyBtn(o[2]):'—'}</dd>
-<dt>E-mail</dt><dd>${o[3]?hl(o[3])+copyBtn(o[3]):'—'}</dd>
-<dt>Comissão</dt><dd>${o[4]?hl(o[4])+copyBtn(o[4]):'<span class="note">não informado</span>'}</dd>
-${o[7]?`<dt>Festiva</dt><dd>${hl(o[7])}</dd>`:''}</dl>`;
-nums = `<div class="nums"><div><b>${fmt(o[5])}</b><span>formandos</span></div>
-<div><b>${fmt(o[9])}</b><span>convites por formando</span></div>
-<div><b>${fmt(o[11])}</b><span>convites estimados</span></div>
-<div><b>${fmt(o[12])}</b><span>formandos + convites</span></div></div>
-<div class="note">Capacidade estimada com 20 convidados institucionais: <b>${fmt(p.g)}</b> pessoas.</div>`;
-full = `<details><summary>Observações completas da planilha</summary><p>${hl(o[8])}</p></details>`;
-} else {
-title = 'Medicina — 75 — colação festiva';
-when = `<b>${hl('18/12/2026 — Expominas (Pavilhões 1 e 2)')}</b><span class="days">${daysTo('18/12/2026')}</span>`;
-kv = `<dl class="kv"><dt>Horário</dt><dd>${hl('A confirmar: 20h na reunião, 19h no registro anterior')}</dd>
-<dt>Equipe</dt><dd>${hl('Chegada entre 16h e 17h')}</dd>
-<dt>Formandos</dt><dd>${hl('Chegada às 17h')}</dd>
-<dt>Autoridades</dt><dd>${hl('Até 19h')}</dd></dl>`;
-nums = `<div class="nums"><div style="grid-column:span 2"><b>≈ 4.000</b><span>público estimado (não validado)</span></div><div style="grid-column:span 2"><b>17</b><span>integrantes previstos na mesa solene</span></div></div>`;
-full = `<details><summary>Ver os 24 alinhamentos da reunião</summary><p>Veja a aba “Festiva Medicina”.</p></details>`;
+const k = calc(c);
+const days = daysTo(c.quando);
+const when = `<b>${hl(c.quando)}</b>${days?`<span class="days">${days}</span>`:''}`;
+const kv = c.kv.length ? `<dl class="kv">${c.kv.map(r=>{ const v=String(r.v??''); const empty=!v||/^(—|não informado)$/i.test(v);
+return `<dt>${hl(r.k)}</dt><dd>${empty ? (v?`<span class="note">${hl(v)}</span>`:'—') : hl(v)+(r.c?copyBtn(v):'')}</dd>`; }).join('')}</dl>` : '';
+const boxes = [];
+if(isNum(c.form)) boxes.push([fmt(c.form),'formandos'],[fmt(c.cpf),'convites por formando'],[fmt(k.conv),'convites estimados'],[fmt(k.fc),'formandos + convites']);
+c.nums.forEach(n=>boxes.push([n.v,n.l]));
+const nums = (boxes.length ? `<div class="nums">${boxes.map(([a,b])=>`<div><b>${hl(a)}</b><span>${hl(b)}</span></div>`).join('')}</div>` : '')
++ (k.capt!=null ? `<div class="note">Capacidade estimada com ${fmt(c.inst||0)} convidados institucionais: <b>${fmt(k.capt)}</b> pessoas.</div>` : '');
+const full = c.obs ? `<details><summary>${esc(c.obsT||'Observações')}</summary><p>${hl(c.obs)}</p></details>` : '';
+const attn = c.attn.length ? `<ul class="attn">${c.attn.map(a=>`<li>${hl(a)}</li>`).join('')}</ul>` : '';
+return `<article class="card"><h3>${hl(c.nome)}</h3><div class="when">${when}</div>${kv}${nums}${attn}${miniStatus(c.key)}${full}${whoLine(c,c.novo?'Criada/alterada':'Editada')}
+<div class="acts"><button class="go" data-go="${esc(c.key)}">Ver checklist desta colação</button><button class="go pdf" data-pdf="${esc(c.key)}">Gerar PDF da colação</button>${edBtn('edit','card',c.id,'Editar ficha','go')}</div></article>`;
 }
-const attn = `<ul class="attn">${c.attn.map(a=>`<li>${hl(a)}</li>`).join('')}</ul>`;
-return `<article class="card"><h3>${hl(title)}</h3><div class="when">${when}</div>${kv}${nums}${attn}${miniStatus(c.g)}${full}
-<div class="acts"><button class="go" data-go="${esc(c.g)}">Ver checklist desta colação</button><button class="go pdf" data-pdf="${esc(c.g)}">Gerar PDF da colação</button></div></article>`;
+function renderTrashCard(c){
+return `<article class="card off"><h3>${esc(c.nome||c.rot)}</h3><div class="when">${esc(c.quando)}</div><p class="note">Colação removida. Os itens do checklist dela continuam guardados.</p>
+<div class="acts">${edBtn('restore','card',c.id,'Restaurar','go')}${c.novo?edBtn('purge','card',c.id,'Excluir definitivamente','go dng'):''}</div></article>`;
 }
 function statusOverview(){
 const tot = CHK.length;
@@ -463,27 +590,33 @@ return `<section class="overview"><h2>Andamento do checklist</h2>
 <div class="legend">${segs.map(s=>`<button class="chip" data-status-go="${esc(s.k)}"><span class="dot c-${s.c}"></span>${s.k}<span class="k">${s.n}</span></button>`).join('')}</div></section>`;
 }
 function vColacoes(){
+const nTr = ALLCARDS.filter(c=>c.hid).length;
+if(S.trash){
+const hs = ALLCARDS.filter(c=>c.hid);
+return `<h2>Colações removidas</h2>${trashBar('card',nTr,'')}${hs.length?`<div class="cards">${hs.map(renderTrashCard).join('')}</div>`:'<div class="empty">Nenhuma colação removida.</div>'}`;
+}
 const cs = CARDS.filter(cardMatch);
 return (terms.length?'':statusOverview()) +
-`<h2>Colações</h2><p class="lead">${terms.length?`${cs.length} de ${CARDS.length} colações correspondem à busca.`:'Uma ficha por turma ou turno, com contatos, números e pontos que precisam de confirmação.'}</p>` +
+`<h2>${esc(T(9))}${txtBtn(9)}</h2><p class="lead">${terms.length?`${cs.length} de ${CARDS.length} colações correspondem à busca.`:esc(T(1))+txtBtn(1)}</p>${trashBar('card',nTr,'Nova colação')}` +
 (cs.length ? `<div class="cards">${cs.map(renderCard).join('')}</div>` : '<div class="empty">Nenhuma ficha de colação corresponde à busca. Veja as outras abas: os números ao lado de cada aba mostram onde há resultados.</div>');
 }
 function vChecklist(){
-const catCounts = {}; CHK.forEach(i=>{catCounts[i.cat]=(catCounts[i.cat]||0)+1});
-const cats = Object.keys(catCounts).sort((a,b)=>a.localeCompare(b,'pt'));
+const catCounts = {}; chkPool().forEach(i=>{catCounts[i.cat]=(catCounts[i.cat]||0)+1});
+const cats = Object.keys(catCounts).filter(Boolean).sort((a,b)=>a.localeCompare(b,'pt'));
 const gBase = filterChk('group'), sBase = filterChk('status');
 const gc = g => gBase.filter(i=>g==='Todas'||i.groups.includes(g)).length;
 const sc = k => sBase.filter(i=>k==='Todos'||i.status===k).length;
 let res = filterChk();
 if(S.sort==='pendencias'){
 const ord = {'Não iniciado':0,'Em andamento':1,'A verificar':2,'Orientação informada':3,'Concluído':4};
-res = [...res].sort((a,b)=>(ord[a.status]-ord[b.status])||(a.l-b.l));
+res = [...res].sort((a,b)=>((ord[a.status]??5)-(ord[b.status]??5))||(a.l-b.l));
 }
 const filtered = S.group!=='Todas'||S.status!=='Todos'||S.cat!=='Todas'||S.urg||terms.length;
 const urgN = filterChk().filter(isUrg).length;
-return `<h2>Checklist de demandas</h2>${syncNote()}
+const nTr = ALLCHK.filter(i=>i.hid).length;
+return `<h2>${S.trash?'Itens removidos':esc(T(8))+txtBtn(8)}</h2>${syncNote()}
 <div class="filters">
-<div class="frow"><label>Turma</label>${['Todas',...GROUPS].map(g=>`<button class="chip" data-group="${esc(g)}" aria-pressed="${S.group===g}">${g}<span class="k">${gc(g)}</span></button>`).join('')}</div>
+<div class="frow"><label>Turma</label>${['Todas',...GROUPS].map(g=>`<button class="chip" data-group="${esc(g)}" aria-pressed="${S.group===g}">${esc(gl(g))}<span class="k">${gc(g)}</span></button>`).join('')}</div>
 <div class="frow"><label>Status</label>${['Todos',...STATUS.map(s=>s.k)].map(k=>`<button class="chip" data-status="${esc(k)}" aria-pressed="${S.status===k}">${k}<span class="k">${sc(k)}</span></button>`).join('')}</div>
 <div class="frow"><label for="cat">Categoria</label>
 <select id="cat"><option value="Todas">Todas as categorias</option>${cats.map(c=>`<option ${S.cat===c?'selected':''} value="${esc(c)}">${esc(c)} (${catCounts[c]})</option>`).join('')}</select>
@@ -491,7 +624,8 @@ return `<h2>Checklist de demandas</h2>${syncNote()}
 <select id="sort"><option value="planilha" ${S.sort==='planilha'?'selected':''}>Ordem da planilha</option><option value="pendencias" ${S.sort==='pendencias'?'selected':''}>Pendências primeiro</option></select>
 <button class="chip" data-urg="1" aria-pressed="${S.urg}">Só urgentes<span class="k">${S.urg?res.length:urgN}</span></button></div>
 </div>
-<div class="resbar"><span>Mostrando <b>${res.length}</b> de ${CHK.length} itens</span>${filtered?'<button class="linkbtn" data-reset="1">Limpar filtros e busca</button>':''}</div>
+${trashBar('chk',nTr,'Novo item')}
+<div class="resbar"><span>Mostrando <b>${res.length}</b> de ${chkPool().length} itens</span>${filtered?'<button class="linkbtn" data-reset="1">Limpar filtros e busca</button>':''}</div>
 ${res.length?`<div class="list">${res.map(renderItem).join('')}</div>`:'<div class="empty">Nenhum item com esses filtros. Tente limpar algum filtro ou mudar a busca.</div>'}`;
 }
 const todayISO = () => { const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); };
@@ -505,17 +639,23 @@ function renderItem(it){
 const showOrig = it.orig && !/^Checklist padrão/.test(it.orig);
 const ro = !(CAN&&DB) ? 'disabled' : '';
 const late = it.lim && it.lim < todayISO() && !['Concluído','Não se aplica','Orientação informada'].includes(it.status);
-return `<article class="item"><div>${statusSelect(it.status,{cls:sCls(it.status),data:`data-l="${it.l}" data-f="status"`},STATUS.map(s=>s.k).filter(k=>k!=='Orientação informada'))}<span class="ref">linha ${it.l} da planilha</span>
-${it.dirty?`<span class="ref">Alterado por ${esc(who(it.by))} em ${fmtAt(it.at)}<button class="linkbtn undo" data-undo="${it.l}" ${ro}>voltar ao original</button></span>`:''}</div>
+const ref = it.novo ? 'item adicionado' : 'linha '+it.l+' da planilha';
+if(it.hid){
+return `<article class="item off"><div><span class="pill s-ori">Removido</span><span class="ref">${ref}</span>${it.dirty?`<span class="ref">Última alteração: ${esc(who(it.by))} em ${fmtAt(it.at)}</span>`:''}</div>
+<div><p class="dem">${hl(it.dem)}</p><p class="meta">${hl(it.turmaLbl)} · ${hl(it.cat)} · ${hl(it.etapa)}</p></div>
+<div class="side">${edBtn('restore','chk',it.l,'Restaurar')}${it.novo?edBtn('purge','chk',it.l,'Excluir definitivamente','dng'):''}</div></article>`;
+}
+return `<article class="item"><div>${statusSelect(it.status,{cls:sCls(it.status),data:`data-l="${it.l}" data-f="status"`},STATUS.map(s=>s.k).filter(k=>k!=='Orientação informada'))}<span class="ref">${ref}</span>
+${it.dirty?`<span class="ref">${it.novo?'Adicionado/alterado':'Alterado'} por ${esc(who(it.by))} em ${fmtAt(it.at)}${it.novo?'':`<button class="linkbtn undo" data-act="reset" data-k="chk" data-id="${it.l}" ${ro}>voltar ao original</button>`}</span>`:''}
+${edBtn('edit','chk',it.l,'Editar item')}</div>
 <div><p class="dem">${hl(it.dem)}</p>
-<p class="meta">${hl(short(it.turma))} · ${hl(it.cat)} · ${hl(it.etapa)}</p>
+<p class="meta">${hl(it.turmaLbl)} · ${hl(it.cat)} · ${hl(it.etapa)}</p>
 ${showOrig?`<p class="orig">${hl(it.orig)}</p>`:''}
 <label class="fld nota">Anotação<input type="text" data-l="${it.l}" data-f="nota" value="${esc(it.nota)}" placeholder="${CAN&&DB?'Escreva uma observação para os colegas':'—'}" ${ro}></label></div>
 <div class="side"><div>Prazo: <b class="${isUrg(it)?'urg':''}">${hl(it.prazo)}</b></div><div>Data: ${hl(it.dt)}</div>
 <label class="fld">Responsável<input type="text" data-l="${it.l}" data-f="resp" value="${esc(it.resp)}" placeholder="${CAN&&DB?'Quem cuida':'—'}" ${ro}></label>
 <label class="fld">Data limite${late?' <b class="urg">(vencida)</b>':''}<input type="date" data-l="${it.l}" data-f="lim" value="${esc(it.lim)}" ${ro}></label></div></article>`;
 }
-const FES_OPTS = ['Confirmado','Pendente','Em andamento','Aprovado','Não aprovada','A verificar'];
 function festSt(s){
 const t = norm(s);
 if(/andamento/.test(t)) return 'and';
@@ -525,58 +665,55 @@ if(/^(confirmado|aprovad)/.test(t)) return 'ok';
 return 'ori';
 }
 function vFestiva(){
-const f = filtFes();
-return `<h2>Colação festiva — Medicina 75</h2>
-<p class="lead">Expominas, Pavilhões 1 e 2, em 18/12/2026. Síntese da reunião de alinhamento; o que não foi confirmado continua como pendência.</p>${syncNote()}
-${f.length?`<div class="fgrid">${f.map(x=>`<article class="fcard"><h4><span>${hl(x.tema)}</span>${statusSelect(x.st,{cls:festSt(x.st),data:`data-fi="${x.i}"`},FES_OPTS)}</h4>${x.dirty?`<p class="ref">Alterado por ${esc(who(x.by))} em ${fmtAt(x.at)}<button class="linkbtn undo" data-undof="${x.i}" ${CAN&&DB?'':'disabled'}>voltar ao original</button></p>`:''}<p>${hl(x.info)}</p><p class="obs">${hl(x.obs)}</p></article>`).join('')}</div>`:'<div class="empty">Nenhum alinhamento da festiva corresponde à busca.</div>'}`;
+const f = filtFes(); const nTr = ALLFES.filter(x=>x.hid).length;
+return `<h2>${S.trash?'Alinhamentos removidos':esc(T(2))+txtBtn(2)}</h2>
+<p class="lead">${esc(T(3))}${txtBtn(3)}</p>${syncNote()}${trashBar('fes',nTr,'Novo alinhamento')}
+${f.length?`<div class="fgrid">${f.map(x=> x.hid ? `<article class="fcard off"><h4><span>${hl(x.tema)}</span><span class="pill s-ori">Removido</span></h4><p>${hl(x.info)}</p><div class="fact">${edBtn('restore','fes',x.id,'Restaurar')}${x.novo?edBtn('purge','fes',x.id,'Excluir definitivamente','dng'):''}</div></article>`
+: `<article class="fcard"><h4><span>${hl(x.tema)}</span>${statusSelect(x.st,{cls:festSt(x.st),data:`data-fi="${x.id}"`},FES_OPTS)}</h4>${x.dirty?`<p class="ref">${x.novo?'Adicionado/alterado':'Alterado'} por ${esc(who(x.by))} em ${fmtAt(x.at)}${x.novo?'':`<button class="linkbtn undo" data-act="reset" data-k="fes" data-id="${x.id}" ${CAN&&DB?'':'disabled'}>voltar ao original</button>`}</p>`:''}<p>${hl(x.info)}</p><p class="obs">${hl(x.obs)}</p><div class="fact">${edBtn('edit','fes',x.id,'Editar')}</div></article>`).join('')}</div>`:'<div class="empty">Nenhum alinhamento da festiva corresponde à busca.</div>'}`;
 }
 function vCapacidade(){
-const c = filtCap();
-const max = Math.max(...CAP.map(x=>+x.g||0));
+const c = filtCap(); const rows = capRows();
+const max = Math.max(1,...rows.filter(x=>!x.total).map(x=>+x.g||0));
 return `<h2>Capacidade e convites</h2>
-<p class="lead">Capacidade = formandos + convites por formando + 20 convidados institucionais por colação. A festiva de Medicina não tem capacidade calculada.</p>
+<p class="lead">${esc(T(4))}${txtBtn(4)}</p>
+<p class="note">Os números desta tabela são calculados a partir das fichas da aba Colações. Para mudar formandos, convites ou convidados institucionais, edite a ficha.</p>
 ${c.length?`<div class="tw"><table><thead><tr><th>Colação</th><th>Data e horário</th><th class="num">Formandos</th><th class="num">Convites por formando</th><th class="num">Convites</th><th class="num">Institucionais</th><th>Total estimado</th><th>Observações</th></tr></thead><tbody>
-${c.map(x=>{const tot=typeof x.g==='number'?x.g:null;const isT=/^TOTAL/.test(x.a);
-return `<tr class="${isT?'total':''}"><td>${hl(x.a)}</td><td>${hl(x.b||'—')}</td><td class="num">${fmt(+x.c||x.c)}</td><td class="num">${fmt(x.d)}</td><td class="num">${fmt(x.e)}</td><td class="num">${fmt(x.f)}</td>
-<td class="num">${tot!=null?`<b>${fmt(tot)}</b>${isT?'':`<div class="meter"><i style="width:${tot/max*100}%"></i></div>`}`:hl(x.g||'—')}</td><td>${hl(x.h)}</td></tr>`}).join('')}
+${c.map(x=>{const tot=typeof x.g==='number'?x.g:null;
+return `<tr class="${x.total?'total':''}"><td>${hl(x.a)}</td><td>${hl(x.b||'—')}</td><td class="num">${fmt(x.c)}</td><td class="num">${fmt(x.d)}</td><td class="num">${fmt(x.e)}</td><td class="num">${fmt(x.f)}</td>
+<td class="num">${tot!=null?`<b>${fmt(tot)}</b>${x.total?'':`<div class="meter"><i style="width:${tot/max*100}%"></i></div>`}`:'—'}</td><td>${hl(x.h)}${x.total?txtBtn(12):''}</td></tr>`}).join('')}
 </tbody></table></div>`:'<div class="empty">Nenhuma linha de capacidade corresponde à busca.</div>'}
-<p class="note" style="margin-top:12px">“Formandos + convites” (aba Colações) não inclui os 20 institucionais. Por isso Medicina manhã aparece como 330 lá e 350 aqui.</p>`;
+<p class="note" style="margin-top:12px">${esc(T(5))}${txtBtn(5)}</p>`;
 }
 function vOri(){
-const o = filtOri();
-return `<h2>Orientações de uso da planilha</h2><p class="lead">Regras de preenchimento e avisos que acompanham o arquivo.</p>
-${o.length?`<div class="orilist">${o.map(x=>`<p>${hl(x.t)}</p>`).join('')}</div>`:'<div class="empty">Nenhuma orientação corresponde à busca.</div>'}`;
+const o = filtOri(); const nTr = ALLORI.filter(x=>x.hid).length;
+return `<h2>${S.trash?'Orientações removidas':esc(T(6))+txtBtn(6)}</h2><p class="lead">${esc(T(7))}${txtBtn(7)}</p>${trashBar('ori',nTr,'Nova orientação')}
+${o.length?`<div class="orilist">${o.map(x=>`<div class="orirow${x.hid?' off':''}"><p>${hl(x.t)}</p><div class="oact">${x.hid ? edBtn('restore','ori',x.id,'Restaurar')+(x.novo?edBtn('purge','ori',x.id,'Excluir definitivamente','dng'):'') : edBtn('edit','ori',x.id,'Editar')}</div></div>`).join('')}</div>`:'<div class="empty">Nenhuma orientação corresponde à busca.</div>'}`;
 }
 
+/* ---------- relatório em PDF ---------- */
 function fmtDate(iso){ const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(iso||''); return m?m[3]+'/'+m[2]+'/'+m[1]:(iso||'—'); }
 function reportFor(c){
-  const o = c.ov!=null ? DATA.ov[c.ov] : null, p = CAP[c.cap];
-  const title = o ? short(o[0]) : 'Medicina — 75 — colação festiva';
-  const items = CHK.filter(i=>i.groups.includes(c.g));
-  let kv;
-  if(o){
-    kv=[['Data e horário',o[6]],['Presidente',o[1]||'não informado'],['Telefone',o[2]||'—'],['E-mail pessoal',o[3]||'—'],['E-mail da comissão',o[4]||'não informado']];
-    if(o[7]) kv.push(['Colação festiva',o[7]]);
-    kv.push(['Possíveis formandos',fmt(o[5])],['Convites por formando',fmt(o[9])],['Convites estimados',fmt(o[11])],['Formandos + convites',fmt(o[12])],['Capacidade estimada (com 20 convidados institucionais)',fmt(p.g)]);
-  } else {
-    kv=[['Data e local','18/12/2026 — Expominas (Pavilhões 1 e 2)'],['Horário','A confirmar: 20h na reunião, 19h no registro anterior'],['Chegada da equipe institucional','Entre 16h e 17h'],['Chegada dos formandos','17h'],['Autoridades','Até 19h'],['Público estimado','Cerca de 4.000 pessoas (não validado)'],['Mesa solene','17 integrantes previstos']];
-  }
+  const k = calc(c);
+  const items = CHK.filter(i=>i.groups.includes(c.key));
+  const kv = [['Data e horário',c.quando||'—'],...c.kv.map(r=>[r.k,r.v||'—'])];
+  if(isNum(c.form)) kv.push(['Possíveis formandos',fmt(c.form)],['Convites por formando',fmt(c.cpf)],['Convites estimados',fmt(k.conv)],['Formandos + convites',fmt(k.fc)],['Capacidade estimada (com '+fmt(c.inst||0)+' convidados institucionais)',fmt(k.capt)]);
+  c.nums.forEach(n=>kv.push([n.l,n.v]));
   const counts = STATUS.map(s=>[s.k,items.filter(i=>i.status===s.k).length]).filter(x=>x[1]);
   const rows = items.map(i=>`<tr><td class="st">${esc(i.status)}</td><td>${esc(i.dem)}<div class="small">${esc(i.cat)} · ${esc(i.etapa)}</div>${i.nota?`<div class="small"><b>Anotação:</b> ${esc(i.nota)}</div>`:''}${i.dirty?`<div class="small">Alterado por ${esc(who(i.by))} em ${esc(fmtAt(i.at))}</div>`:''}</td><td>${esc(i.prazo)}</td><td>${esc(i.resp||'—')}</td><td>${esc(fmtDate(i.lim))}</td></tr>`).join('');
-  const fes = c.g==='Medicina festiva' ? `<h2>Alinhamentos da reunião da festiva</h2><table><thead><tr><th>Tema</th><th>Informação</th><th>Status</th><th>Observações</th></tr></thead><tbody>${FES.map(f=>`<tr><td><b>${esc(f.tema)}</b></td><td>${esc(f.info)}</td><td class="st">${esc(f.st)}</td><td>${esc(f.obs)}</td></tr>`).join('')}</tbody></table>` : '';
-  return `<h1>Relatório da colação — ${esc(title)}</h1>
-  <p class="sub">${esc(o?o[6]:'18/12/2026 — Expominas')} · Gerado em ${esc(new Date().toLocaleString('pt-BR'))} por ${esc(MYID||'—')} · Painel das Colações de fim de ano 2026</p>
-  <h2>Informações gerais</h2><table class="kv"><tbody>${kv.map(([k,v])=>`<tr><td>${esc(k)}</td><td>${esc(v)}</td></tr>`).join('')}</tbody></table>
-  <h2>Pontos de atenção</h2><ul>${c.attn.map(a=>`<li>${esc(a)}</li>`).join('')}</ul>
-  ${o?`<h2>Observações da planilha</h2><p>${esc(o[8])}</p>`:''}
+  const fes = c.id===5 ? `<h2>Alinhamentos da reunião da festiva</h2><table><thead><tr><th>Tema</th><th>Informação</th><th>Status</th><th>Observações</th></tr></thead><tbody>${FES.map(f=>`<tr><td><b>${esc(f.tema)}</b></td><td>${esc(f.info)}</td><td class="st">${esc(f.st)}</td><td>${esc(f.obs)}</td></tr>`).join('')}</tbody></table>` : '';
+  return `<h1>Relatório da colação — ${esc(c.nome)}</h1>
+  <p class="sub">${esc(c.quando)} · Gerado em ${esc(new Date().toLocaleString('pt-BR'))} por ${esc(MYID||'—')} · ${esc(T(10))}</p>
+  <h2>Informações gerais</h2><table class="kv"><tbody>${kv.map(([a,b])=>`<tr><td>${esc(a)}</td><td>${esc(b)}</td></tr>`).join('')}</tbody></table>
+  ${c.attn.length?`<h2>Pontos de atenção</h2><ul>${c.attn.map(a=>`<li>${esc(a)}</li>`).join('')}</ul>`:''}
+  ${c.obs&&c.id!==5?`<h2>${esc(c.obsT||'Observações')}</h2><p>${esc(c.obs)}</p>`:''}
   ${fes}
-  <h2>Checklist de demandas</h2><p>${items.length} itens: ${counts.map(([k,n])=>n+' '+esc(k.toLowerCase())).join(' · ')}.</p>
-  <table><thead><tr><th>Status</th><th>Demanda</th><th>Prazo</th><th>Responsável</th><th>Data limite</th></tr></thead><tbody>${rows}</tbody></table>`;
+  <h2>Checklist de demandas</h2>${items.length?`<p>${items.length} itens: ${counts.map(([k2,n])=>n+' '+esc(k2.toLowerCase())).join(' · ')}.</p>
+  <table><thead><tr><th>Status</th><th>Demanda</th><th>Prazo</th><th>Responsável</th><th>Data limite</th></tr></thead><tbody>${rows}</tbody></table>`:'<p>Nenhum item cadastrado para esta colação.</p>'}`;
 }
 function printReport(c){
   const r=$('#report'); r.innerHTML=reportFor(c);
   const t=document.title; const d=new Date();
-  document.title='Colação - '+(c.ov!=null?short(DATA.ov[c.ov][0]):'Medicina 75 festiva')+' - '+d.toISOString().slice(0,10);
+  document.title='Colação - '+c.nome+' - '+d.toISOString().slice(0,10);
   const back=()=>{document.title=t; r.innerHTML='';};
   window.addEventListener('afterprint',back,{once:true});
   try{ window.print(); }catch(e){ back(); toast('Não foi possível abrir a impressão. Use Ctrl+P.'); }
@@ -584,6 +721,8 @@ function printReport(c){
 function renderUser(){ const b=$('#userbar'); if(!b) return; if(MYID){ $('#whoami').innerHTML = DB ? 'Conectado como <b>'+esc(MYID)+'</b>' : '<b>'+esc(MYID)+'</b> (sem conexão para salvar)'; b.hidden=false; } else b.hidden=true; }
 function render(){
 renderUser();
+$('#htitle').innerHTML = esc(T(10)) + txtBtn(10);
+$('#hsub').innerHTML = esc(T(11)) + txtBtn(11);
 renderTotals();
 terms = norm(S.q).split(/\s+/).filter(Boolean);
 renderTabs();
@@ -592,8 +731,173 @@ const el = $('#view'); el.innerHTML = v;
 $('#clearq').hidden = !S.q;
 }
 function setTab(t, push=true){
-S.tab = t; if(push){try{history.replaceState(null,'','#'+t)}catch(e){}}
+S.tab = t; S.trash = false; if(push){try{history.replaceState(null,'','#'+t)}catch(e){}}
 render();
+}
+
+/* ---------- formulários de edição (janela) ---------- */
+let MCFG=null;
+const listRow = x => `<div class="mrow"><textarea rows="2">${esc(x)}</textarea><button type="button" class="mrm" data-mrm="1" aria-label="Remover linha">×</button></div>`;
+const kvRow = r => `<div class="mrow kv3"><input type="text" class="k" placeholder="Rótulo (ex.: Presidente)" value="${esc(r.k)}"><input type="text" class="v" placeholder="Valor" value="${esc(r.v)}"><label class="cp"><input type="checkbox" class="c" ${r.c?'checked':''}> copiar</label><button type="button" class="mrm" data-mrm="1" aria-label="Remover linha">×</button></div>`;
+const numRow = r => `<div class="mrow n2"><input type="text" class="v" placeholder="Número ou valor" value="${esc(r.v)}"><input type="text" class="l" placeholder="Descrição" value="${esc(r.l)}"><button type="button" class="mrm" data-mrm="1" aria-label="Remover linha">×</button></div>`;
+const ROWS = {list:listRow,kv:kvRow,nums:numRow};
+const EMPTY = {list:'',kv:{k:'',v:'',c:0},nums:{v:'',l:''}};
+function fieldHtml(f,v){
+const L = `<span class="ml">${esc(f.l)}</span>`, H = f.h ? `<span class="mh">${esc(f.h)}</span>` : '';
+if(f.t==='text'||f.t==='num') return `<label class="mf">${L}<input name="${f.n}" type="text" ${f.t==='num'?'inputmode="decimal"':''} value="${esc(v??'')}" ${f.list?`list="dl_${f.n}"`:''} autocomplete="off">${f.list?`<datalist id="dl_${f.n}">${f.list.map(x=>`<option value="${esc(x)}">`).join('')}</datalist>`:''}${H}</label>`;
+if(f.t==='area') return `<label class="mf">${L}<textarea name="${f.n}" rows="${f.rows||3}">${esc(v??'')}</textarea>${H}</label>`;
+if(f.t==='select') return `<label class="mf">${L}<select name="${f.n}">${f.opts.map(o=>`<option value="${esc(o.v)}" ${o.v===v?'selected':''}>${esc(o.l)}</option>`).join('')}</select>${H}</label>`;
+if(f.t==='checks') return `<fieldset class="mf"><legend class="ml">${esc(f.l)}</legend><div class="mchk">${f.opts.map(o=>`<label><input type="checkbox" name="${f.n}" value="${esc(o.v)}" ${(v||[]).includes(o.v)?'checked':''}> ${esc(o.l)}</label>`).join('')}</div>${H}</fieldset>`;
+return `<div class="mf" data-list="${f.n}" data-lt="${f.t}">${L}<div class="mrows">${(v||[]).map(ROWS[f.t]).join('')}</div><button type="button" class="ed add" data-madd="1">+ Adicionar</button>${H}</div>`;
+}
+function normVals(fields,src){
+const o={};
+fields.forEach(f=>{ const v=src[f.n];
+if(f.t==='text'||f.t==='area'||f.t==='select') o[f.n]=v==null?'':v;
+else if(f.t==='num') o[f.n]=num(v);
+else if(f.t==='checks'||f.t==='list') o[f.n]=Array.isArray(v)?[...v]:[];
+else if(f.t==='kv') o[f.n]=(Array.isArray(v)?v:[]).map(r=>({k:r.k||'',v:r.v||'',c:r.c?1:0}));
+else if(f.t==='nums') o[f.n]=(Array.isArray(v)?v:[]).map(r=>({v:String(r.v??''),l:r.l||''}));
+});
+return o;
+}
+function collect(root,fields){
+const out={};
+fields.forEach(f=>{
+const q = sel => root.querySelector(sel);
+if(f.t==='text'||f.t==='area'||f.t==='select') out[f.n]=q(`[name="${f.n}"]`).value.trim();
+else if(f.t==='num') out[f.n]=q(`[name="${f.n}"]`).value.trim();
+else if(f.t==='checks') out[f.n]=[...root.querySelectorAll(`input[name="${f.n}"]:checked`)].map(x=>x.value);
+else { const rows=[...q(`[data-list="${f.n}"]`).querySelectorAll('.mrow')];
+if(f.t==='list') out[f.n]=rows.map(r=>r.querySelector('textarea').value.trim()).filter(Boolean);
+if(f.t==='kv') out[f.n]=rows.map(r=>({k:r.querySelector('.k').value.trim(),v:r.querySelector('.v').value.trim(),c:r.querySelector('.c').checked?1:0})).filter(r=>r.k||r.v);
+if(f.t==='nums') out[f.n]=rows.map(r=>({v:r.querySelector('.v').value.trim(),l:r.querySelector('.l').value.trim()})).filter(r=>r.v||r.l);
+}
+});
+return out;
+}
+function openForm(cfg){
+MCFG = cfg; const m = $('#modal');
+m.innerHTML = `<form class="modal" role="dialog" aria-modal="true" aria-labelledby="mt" novalidate><h2 id="mt">${esc(cfg.title)}</h2>${cfg.note?`<p class="note">${esc(cfg.note)}</p>`:''}
+<div class="mbody">${cfg.fields.map(f=>fieldHtml(f,cfg.vals[f.n])).join('')}</div><p class="merr urg" id="merr" hidden></p>
+<div class="mfoot">${(cfg.extra||[]).map((x,i)=>`<button type="button" class="outbtn ${x.cls||''}" data-mx="${i}">${esc(x.label)}</button>`).join('')}<span class="sp"></span><button type="button" class="outbtn" data-mclose="1">Cancelar</button><button class="go2" type="submit">Salvar</button></div></form>`;
+m.hidden = false; document.body.classList.add('mopen');
+const first = m.querySelector('input:not([type=checkbox]),textarea,select'); if(first) first.focus();
+}
+function closeForm(){ const m=$('#modal'); m.hidden=true; m.innerHTML=''; MCFG=null; document.body.classList.remove('mopen'); }
+function formError(msg){ const e=$('#merr'); e.textContent=msg; e.hidden=false; }
+function submitForm(){
+const cfg = MCFG; if(!cfg) return;
+const raw = collect($('#modal form'), cfg.fields);
+for(const f of cfg.fields){
+if(f.req && !String(raw[f.n]).trim()) return formError('Preencha: '+f.l+'.');
+if(f.reqArr && !raw[f.n].length) return formError('Escolha pelo menos uma opção em: '+f.l+'.');
+if(f.t==='num' && raw[f.n]!=='' && num(raw[f.n])===null) return formError('Número inválido em: '+f.l+'.');
+}
+const vals = {}; cfg.fields.forEach(f=>{ vals[f.n] = f.t==='num' ? num(raw[f.n]) : raw[f.n]; });
+const diff = {}; cfg.fields.forEach(f=>{ if(JSON.stringify(vals[f.n])!==JSON.stringify(cfg.vals[f.n])) diff[f.n]=vals[f.n]; });
+closeForm();
+cfg.onSave(diff, vals);
+}
+
+/* campos de cada tipo de registro */
+const chkFields = () => [
+{n:'dem',t:'area',l:'Demanda',rows:4,req:1},
+{n:'cat',t:'text',l:'Categoria',list:uniq(ALLCHK.map(i=>i.cat)),h:'Escolha uma existente ou digite uma nova.'},
+{n:'etapa',t:'text',l:'Etapa',list:uniq(ALLCHK.map(i=>i.etapa))},
+{n:'prazo',t:'text',l:'Prazo',list:uniq(ALLCHK.map(i=>i.prazo))},
+{n:'dt',t:'text',l:'Data (texto livre)',list:uniq(ALLCHK.map(i=>i.dt))},
+{n:'groups',t:'checks',l:'Aparece nas colações',opts:CARDS.map(c=>({v:c.key,l:c.rot})),reqArr:1},
+{n:'orig',t:'area',l:'Observação de origem (opcional)',rows:2}
+];
+const stdItems = () => { const seen=new Set(); return ALLCHK.filter(i=>!i.hid&&!i.novo&&/^Checklist padrão/.test(i.orig||'')).filter(i=>{ if(seen.has(i.dem)) return false; seen.add(i.dem); return true; }); };
+const cardFields = isNew => [
+...(isNew ? [{n:'cp',t:'select',l:'Checklist da nova colação',opts:[{v:'std',l:'Copiar o checklist padrão ('+stdItems().length+' itens comuns a todas as turmas)'},{v:'vazio',l:'Começar vazio'},...CARDS.map(c=>({v:'src:'+c.key,l:'Copiar todos os itens de '+c.rot}))]}] : []),
+{n:'nome',t:'text',l:'Título da ficha',req:1,h:'Ex.: Odontologia — 12 (2º/2026)'},
+{n:'rot',t:'text',l:'Nome curto (para os filtros)',req:1,h:'Ex.: Odontologia'},
+{n:'quando',t:'text',l:'Data e horário',h:'Ex.: 22/12/2026 às 10h. Com uma data no formato dd/mm/aaaa, a ficha mostra quantos dias faltam.'},
+{n:'kv',t:'kv',l:'Informações da ficha (contatos, local, equipe…)',h:'Marque “copiar” para mostrar um botão de copiar ao lado do valor.'},
+{n:'form',t:'num',l:'Possíveis formandos (número)'},
+{n:'cpf',t:'num',l:'Convites por formando (número)'},
+{n:'inst',t:'num',l:'Convidados institucionais (número)',h:'Convites estimados, formandos + convites e capacidade são calculados sozinhos.'},
+{n:'nums',t:'nums',l:'Outros números em destaque',h:'Ex.: valor “≈ 4.000” e descrição “público estimado”.'},
+{n:'attn',t:'list',l:'Pontos de atenção'},
+{n:'obsT',t:'text',l:'Título do bloco de observações'},
+{n:'obs',t:'area',l:'Observações completas',rows:5},
+{n:'capObs',t:'area',l:'Observação na aba Capacidade',rows:3}
+];
+const fesFields = isNew => [
+{n:'tema',t:'text',l:'Tema',req:1},
+{n:'info',t:'area',l:'Informação',rows:3},
+...(isNew ? [{n:'st',t:'select',l:'Status',opts:FES_OPTS.map(o=>({v:o,l:o}))}] : []),
+{n:'obs',t:'area',l:'Observações',rows:3}
+];
+const oriFields = () => [{n:'t',t:'area',l:'Texto da orientação',rows:5,req:1}];
+
+/* ---------- ações de edição ---------- */
+function newId(kind, used){ for(let n=0;n<200;n++){ const id=1000+Math.floor(Math.random()*9000); if(!OV[kind][id] && !(used&&used.has(id))){ if(used) used.add(id); return id; } } return 1000+Date.now()%9000; }
+function recOf(k,id){ id=+id; return k==='chk'?byId.get(id):k==='fes'?byF.get(id):k==='ori'?byO.get(id):ALLCARDS.find(c=>c.id===id); }
+function removeRec(k,id,msg){ if(confirm(msg)){ closeForm(); patch(k,id,{hid:true}); } }
+function editRec(k,id){
+const r = recOf(k,id); if(!r||!ED()) return;
+let cfg;
+if(k==='chk'){ const fields=chkFields(); cfg={title:'Editar item do checklist',fields,vals:normVals(fields,r),
+ extra:[{label:'Remover item',cls:'dng',fn:()=>removeRec('chk',r.id,'Remover este item do checklist? Ele vai para “Ver removidos” e pode ser restaurado.')}],
+ onSave:d=>{ if(Object.keys(d).length) patch('chk',r.id,d); }}; }
+else if(k==='fes'){ const fields=fesFields(false); cfg={title:'Editar alinhamento da festiva',fields,vals:normVals(fields,r),
+ extra:[{label:'Remover',cls:'dng',fn:()=>removeRec('fes',r.id,'Remover este alinhamento? Ele vai para “Ver removidos” e pode ser restaurado.')}],
+ onSave:d=>{ if(Object.keys(d).length) patch('fes',r.id,d); }}; }
+else if(k==='ori'){ const fields=oriFields(); cfg={title:'Editar orientação',fields,vals:normVals(fields,r),
+ extra:[{label:'Remover',cls:'dng',fn:()=>removeRec('ori',r.id,'Remover esta orientação? Ela vai para “Ver removidos” e pode ser restaurada.')}],
+ onSave:d=>{ if(Object.keys(d).length) patch('ori',r.id,d); }}; }
+else if(k==='card'){ const fields=cardFields(false); cfg={title:'Editar ficha da colação',fields,vals:normVals(fields,r),
+ note:'As mudanças aparecem para todos os colegas. Quem editou e quando fica registrado na ficha.',
+ extra:[{label:'Remover colação',cls:'dng',fn:()=>removeRec('card',r.id,'Remover esta colação do painel? Ela e a ficha vão para “Ver removidos” e podem ser restauradas. Os itens do checklist continuam guardados.')},
+ ...(!r.novo&&r.dirty?[{label:'Voltar ao original',fn:()=>{ closeForm(); resetKey('card',r.id); }}]:[])],
+ onSave:d=>{ if(Object.keys(d).length) patch('card',r.id,d); }}; }
+openForm(cfg);
+}
+function newRec(k){
+if(!ED()) return;
+if(k==='chk'){ const fields=chkFields(); openForm({title:'Novo item no checklist',fields,vals:normVals(fields,{dem:'',cat:'',etapa:'',prazo:'',dt:'',orig:'',groups:S.group!=='Todas'?[S.group]:[]}),
+ onSave:(d,v)=>patch('chk',newId('chk'),{...v,novo:1,status:'Não iniciado',ord:Date.now()})}); }
+else if(k==='fes'){ const fields=fesFields(true); openForm({title:'Novo alinhamento da festiva',fields,vals:normVals(fields,{tema:'',info:'',obs:'',st:'Pendente'}),
+ onSave:(d,v)=>patch('fes',newId('fes'),{...v,novo:1,ord:Date.now()})}); }
+else if(k==='ori'){ const fields=oriFields(); openForm({title:'Nova orientação',fields,vals:normVals(fields,{t:''}),
+ onSave:(d,v)=>patch('ori',newId('ori'),{...v,novo:1,ord:Date.now()})}); }
+else if(k==='card'){ const fields=cardFields(true);
+ openForm({title:'Nova colação',note:'Cria uma ficha nova (por exemplo, outra turma ou evento) com o próprio checklist.',fields,
+ vals:{...normVals(fields,{nome:'',rot:'',quando:'',form:null,cpf:null,inst:20,obsT:'Observações',obs:'',capObs:'',attn:[],nums:[],kv:[{k:'Presidente',v:'',c:0},{k:'Telefone',v:'',c:1},{k:'E-mail',v:'',c:1},{k:'Comissão',v:'',c:1}]}),cp:'std'},
+ onSave:(d,v)=>createCard(v)}); }
+}
+async function createCard(v){
+const {cp,...doc} = v; const id = newId('card'); const key = 'n'+id; const ts = Date.now();
+let src = [];
+if(cp==='std') src = stdItems();
+else if(cp.startsWith('src:')) src = CHK.filter(i=>i.groups.includes(cp.slice(4)));
+await patch('card',id,{...doc,novo:1,ord:ts});
+if(!src.length) { toast('Colação criada.'); return; }
+const used = new Set(); inflight++; saveSeq++;
+try{
+const itens = src.map((i,n)=>({chave:'chk:'+newId('chk',used),dados:{novo:1,dem:i.dem,cat:i.cat,etapa:i.etapa,prazo:i.prazo,dt:doc.quando||'',orig:i.orig||'',groups:[key],status:'Não iniciado',ord:ts+n+1}}));
+for(let a=0;a<itens.length;a+=100) await rpc('colacoes_salvar_lote',{p_nome:MYID,p_senha:CODE,p_itens:itens.slice(a,a+100)});
+toast('Colação criada com '+itens.length+' itens no checklist.');
+}catch(e){ toast('A ficha foi criada, mas não foi possível copiar o checklist. Tente adicionar os itens manualmente.'); }
+finally{ inflight--; lastSig=''; poll(); }
+}
+function editTxt(id){
+if(!ED()) return; const d=TXT_DEF[id]; const fields=[{n:'v',t:'area',l:d.l,rows:id===10?2:4,req:1}];
+openForm({title:'Editar texto',fields,vals:{v:T(id)},extra:OV.txt[id]?[{label:'Voltar ao texto padrão',fn:()=>{ closeForm(); resetKey('txt',id); }}]:[],
+onSave:df=>{ if(df.v!==undefined) patch('txt',id,{v:df.v}); }});
+}
+function act(a,k,id){
+if(a==='edit') return editRec(k,id);
+if(a==='new') return newRec(k);
+if(a==='txt') return editTxt(+id);
+if(a==='trash'){ S.trash=!S.trash; return render(); }
+if(a==='restore') return patch(k,+id,{hid:false});
+if(a==='reset') return resetKey(k,+id);
+if(a==='purge'){ if(confirm('Excluir de vez? Isso não pode ser desfeito.')) hardDelete(k,+id); return; }
 }
 
 /* ---------- eventos ---------- */
@@ -601,6 +905,11 @@ $('#q').addEventListener('input', e=>{S.q=e.target.value; render();});
 $('#clearq').addEventListener('click', ()=>{S.q='';$('#q').value='';render();$('#q').focus();});
 document.addEventListener('click', e=>{
 const b = e.target.closest('button'); if(!b) return;
+if(b.dataset.mclose) return closeForm();
+if(b.dataset.mx!==undefined){ const x=MCFG&&MCFG.extra[+b.dataset.mx]; if(x) x.fn(); return; }
+if(b.dataset.mrm){ b.closest('.mrow').remove(); return; }
+if(b.dataset.madd){ const box=b.closest('[data-list]'), t=box.dataset.lt; const rows=box.querySelector('.mrows'); rows.insertAdjacentHTML('beforeend',ROWS[t](EMPTY[t])); const f=rows.lastElementChild.querySelector('input:not([type=checkbox]),textarea'); if(f) f.focus(); return; }
+if(b.dataset.act) return act(b.dataset.act,b.dataset.k,b.dataset.id);
 if(b.dataset.tab) return setTab(b.dataset.tab);
 if(b.dataset.group!==undefined){S.group=b.dataset.group;return render();}
 if(b.dataset.status!==undefined){S.status=b.dataset.status;return render();}
@@ -608,9 +917,7 @@ if(b.dataset.urg){S.urg=!S.urg;return render();}
 if(b.dataset.reset){Object.assign(S,{group:'Todas',status:'Todos',cat:'Todas',urg:false,q:''});$('#q').value='';return render();}
 if(b.dataset.go){Object.assign(S,{group:b.dataset.go,status:'Todos',cat:'Todas',urg:false});setTab('checklist');return window.scrollTo({top:0});}
 if(b.dataset.statusGo){Object.assign(S,{group:'Todas',status:b.dataset.statusGo,cat:'Todas',urg:false});setTab('checklist');return window.scrollTo({top:0});}
-if(b.dataset.pdf){const c=CARDS.find(x=>x.g===b.dataset.pdf); if(c) printReport(c); return;}
-  if(b.dataset.undo){const it=byL.get(+b.dataset.undo); if(it&&DB) DB.doc('chk/l'+it.l).delete().catch(()=>toast('Não foi possível desfazer. Tente de novo.')); return;}
-if(b.dataset.undof){const f=FES[+b.dataset.undof]; if(f&&DB) DB.doc('fes/r'+f.i).delete().catch(()=>toast('Não foi possível desfazer. Tente de novo.')); return;}
+if(b.dataset.pdf){const c=CARDS.find(x=>x.key===b.dataset.pdf); if(c) printReport(c); return;}
 if(b.dataset.copy){
 const v=b.dataset.copy, done=()=>{b.textContent='copiado';setTimeout(()=>b.textContent='copiar',1400)};
 (navigator.clipboard&&navigator.clipboard.writeText(v).then(done).catch(()=>fallback(v,done)))||fallback(v,done);
@@ -618,76 +925,74 @@ const v=b.dataset.copy, done=()=>{b.textContent='copiado';setTimeout(()=>b.textC
 });
 function fallback(v,done){const t=document.createElement('textarea');t.value=v;document.body.appendChild(t);t.select();try{document.execCommand('copy');done()}catch(e){}t.remove();}
 document.addEventListener('change', e=>{
-const t = e.target;
-if(t.dataset && t.dataset.l && t.dataset.f){ const it=byL.get(+t.dataset.l); if(it) saveChk(it,t.dataset.f,t.value.trim?t.value.trim():t.value); return; }
-if(t.dataset && t.dataset.fi){ const f=FES[+t.dataset.fi]; if(f) saveFes(f,t.value); return; }
-if(e.target.id==='cat'){S.cat=e.target.value;render();}
-if(e.target.id==='sort'){S.sort=e.target.value;render();}
+const t = e.target; if(t.closest && t.closest('#modal')) return;
+if(t.dataset && t.dataset.l && t.dataset.f){ const it=byId.get(+t.dataset.l); if(it) saveChk(it,t.dataset.f,t.value.trim?t.value.trim():t.value); return; }
+if(t.dataset && t.dataset.fi){ const f=byF.get(+t.dataset.fi); if(f) saveFes(f,t.value); return; }
+if(t.id==='cat'){S.cat=t.value;render();}
+if(t.id==='sort'){S.sort=t.value;render();}
 });
-window.addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(TABS.some(t=>t[0]===h)){S.tab=h;render();}});
-
+document.addEventListener('keydown', e=>{ if(e.key==='Escape' && MCFG) closeForm(); });
+window.addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(TABS.some(t=>t[0]===h)){S.tab=h;S.trash=false;render();}});
 {const h=location.hash.slice(1); if(TABS.some(t=>t[0]===h)) S.tab=h;}
 
-/* ---------- edição compartilhada (db) ---------- */
-let DB=null, CAN=false, MYID='', CODE='', LOGIN_ERR='', SYNC='off', pending=false, lastChk=null, lastFes=null, lastSig='', pollT=null;
+/* ---------- edição compartilhada (banco) ---------- */
+let DB=null, CAN=false, MYID='', CODE='', LOGIN_ERR='', SYNC='off', pending=false, lastSig='', pollT=null, saveSeq=0, inflight=0, lastRows=[];
 const Q={};
 const SB_URL='https://xhidcbfjdyrompxubrha.supabase.co', SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhoaWRjYmZqZHlyb21weHVicmhhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYxMzAxMTMsImV4cCI6MjEwMTcwNjExM30.yHLmSd5k2qYYIPiu3QPkFdSx-z8uOID5c4RJySXZ1iA';
 function syncNote(){
 if(SYNC==='loading') return '<p class="sync">Conectando para carregar as alterações dos colegas…</p>';
 if(!DB) return `<p class="sync warn">${esc(LOGIN_ERR||'Sem conexão com o banco no momento.')} <button class="linkbtn" data-logout="1">Entrar de novo</button></p>`;
-return `<p class="sync ok">Edição compartilhada ativa como <b>${esc(MYID)}</b>. O que você mudar é salvo na hora; as mudanças dos colegas chegam em alguns segundos. <button class="linkbtn" data-logout="1">Sair</button></p>`;
+return `<p class="sync ok">Edição compartilhada ativa como <b>${esc(MYID)}</b>. Status, textos e itens podem ser editados; tudo é salvo na hora e registra quem alterou. As mudanças dos colegas chegam em alguns segundos. <button class="linkbtn" data-logout="1">Sair</button></p>`;
 }
-let toastT; function toast(m){let el=$('#toast'); if(!el){el=document.createElement('div');el.id='toast';el.className='toast';el.setAttribute('role','status');document.body.appendChild(el);} el.textContent=m; el.hidden=false; clearTimeout(toastT); toastT=setTimeout(()=>{el.hidden=true},4000);}
+let toastT; function toast(m){let el=$('#toast'); if(!el){el=document.createElement('div');el.id='toast';el.className='toast';el.setAttribute('role','status');document.body.appendChild(el);} el.textContent=m; el.hidden=false; clearTimeout(toastT); toastT=setTimeout(()=>{el.hidden=true},4500);}
 function softRender(){const a=document.activeElement; if(a&&a.closest&&a.closest('#view')&&/INPUT|SELECT|TEXTAREA/.test(a.tagName)){pending=true;return;} render();}
 document.addEventListener('focusout',()=>{ if(pending){pending=false; setTimeout(render,0);} });
 const queue=(k,fn)=>{ Q[k]=(Q[k]||Promise.resolve()).then(fn,fn); return Q[k]; };
-function stamp(){ return {by:MYID, at:new Date().toISOString()}; }
 
-function saveChk(it, field, val){
-if(!DB||!CAN) return;
-if(it[field]===val) return;
-it[field]=val; it.dirty=true; it.by=MYID; it.at=new Date().toISOString(); rehay(it);
-const doc={status:it.status,resp:it.resp,lim:it.lim,nota:it.nota,...stamp()};
-queue('c'+it.l,()=>DB.doc('chk/l'+it.l).set(doc)).catch(()=>{toast('Não foi possível salvar. A alteração foi desfeita.'); if(lastChk) applyChk(lastChk); render();});
-if(field==='status') render();
-}
-function saveFes(f,val){
-if(!DB||!CAN||f.st===val) return;
-f.st=val; f.dirty=true; f.by=MYID; f.at=new Date().toISOString(); rehayF(f);
-queue('f'+f.i,()=>DB.doc('fes/r'+f.i).set({st:val,...stamp()})).catch(()=>{toast('Não foi possível salvar. A alteração foi desfeita.'); if(lastFes) applyFes(lastFes); render();});
-render();
-}
-function applyChk(snap){
-lastChk=snap; const seen=new Set();
-snap.docs.forEach(d=>{ const m=/^l(\d+)$/.exec(d.id); const it=m&&byL.get(+m[1]); if(!it) return; const v=d.data()||{}; seen.add(it.l);
-Object.assign(it,{status:v.status||it.st0,resp:v.resp||'',lim:v.lim||'',nota:v.nota||'',by:v.by||null,at:v.at||null,dirty:true}); rehay(it); });
-CHK.forEach(it=>{ if(it.dirty&&!seen.has(it.l)){ Object.assign(it,{status:it.st0,resp:'',lim:'',nota:'',by:null,at:null,dirty:false}); rehay(it);} });
-}
-function applyFes(snap){
-lastFes=snap; const seen=new Set();
-snap.docs.forEach(d=>{ const m=/^r(\d+)$/.exec(d.id); const f=m&&FES[+m[1]]; if(!f) return; const v=d.data()||{}; seen.add(f.i);
-Object.assign(f,{st:v.st||f.st0,by:v.by||null,at:v.at||null,dirty:true}); rehayF(f); });
-FES.forEach(f=>{ if(f.dirty&&!seen.has(f.i)){ Object.assign(f,{st:f.st0,by:null,at:null,dirty:false}); rehayF(f);} });
-}
 const ls = {get:k=>{try{return localStorage.getItem(k)||''}catch(e){return ''}}, set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}, del:k=>{try{localStorage.removeItem(k)}catch(e){}}};
 async function rpc(fn, body){
 const r = await fetch(SB_URL+'/rest/v1/rpc/'+fn,{method:'POST',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json'},body:JSON.stringify(body)});
 if(!r.ok){ let m=''; try{m=(await r.json()).message||''}catch(e){} const e=new Error(m||('http '+r.status)); e.code=m; throw e; }
 const t=await r.text(); return t?JSON.parse(t):null;
 }
-const keyOf = path => { const [col,id]=path.split('/'); return col+':'+id.replace(/^[lr]/,''); };
-const dbAdapter = {doc:path=>({
-set:d=>rpc('colacoes_salvar',{p_nome:MYID,p_senha:CODE,p_chave:keyOf(path),p_dados:d}),
-delete:()=>rpc('colacoes_apagar',{p_nome:MYID,p_senha:CODE,p_chave:keyOf(path)}).then(()=>poll())
-})};
+function applyRows(rows){
+lastRows = rows; OV = {chk:{},fes:{},ori:{},card:{},txt:{}};
+rows.forEach(r=>{ const p=String(r.chave).split(':'); if(OV[p[0]]) OV[p[0]][p[1]]={d:r.dados||{},by:r.autor,at:r.atualizado_em}; });
+rebuild();
+}
+function patch(kind,id,fields,opt){
+if(!ED()) return Promise.resolve();
+const key=kind+':'+id, cur=OV[kind][id];
+OV[kind][id]={d:{...(cur?cur.d:{}),...fields},by:MYID,at:new Date().toISOString()};
+rebuild(); if(!(opt&&opt.norender)) render();
+saveSeq++; inflight++;
+return queue(key,()=>rpc('colacoes_mesclar',{p_nome:MYID,p_senha:CODE,p_chave:key,p_dados:fields}))
+.catch(()=>{ toast('Não foi possível salvar. A alteração foi desfeita.'); applyRows(lastRows); render(); })
+.finally(()=>{ inflight--; if(!inflight){ lastSig=''; poll(); } });
+}
+function resetKey(kind,id){
+if(!ED()) return Promise.resolve();
+const key=kind+':'+id;
+delete OV[kind][id]; rebuild(); render();
+saveSeq++; inflight++;
+return queue(key,()=>rpc('colacoes_apagar',{p_nome:MYID,p_senha:CODE,p_chave:key}))
+.catch(()=>{ toast('Não foi possível concluir. Tente de novo.'); })
+.finally(()=>{ inflight--; lastSig=''; poll(); });
+}
+const hardDelete = resetKey;
+function saveChk(it, field, val){
+if(!ED()||it[field]===val) return;
+patch('chk',it.l,{[field]:val},{norender: field!=='status'});
+}
+function saveFes(f,val){ if(!ED()||f.st===val) return; patch('fes',f.id,{st:val}); }
 async function poll(){
-if(!CODE) return;
+if(!CODE||inflight) return; const s0=saveSeq;
 try{
 const rows = await rpc('colacoes_ler',{p_nome:MYID,p_senha:CODE});
+if(saveSeq!==s0||inflight) return;
 const sig = JSON.stringify(rows);
 if(sig===lastSig) return; lastSig=sig;
-const mk=(pre,letter)=>({docs:rows.filter(r=>r.chave.startsWith(pre+':')).map(r=>({id:letter+r.chave.split(':')[1],data:()=>({...r.dados,by:r.autor,at:r.atualizado_em})}))});
-applyChk(mk('chk','l')); applyFes(mk('fes','r')); softRender();
+applyRows(rows); softRender();
 }catch(e){ if(e.code==='codigo_invalido') logout('Seu acesso foi alterado ou desativado. Entre de novo.'); }
 }
 function startPolling(){ clearInterval(pollT); pollT=setInterval(()=>{ if(!document.hidden) poll(); },12000); }
@@ -697,8 +1002,8 @@ SYNC='loading'; LOGIN_ERR=''; render();
 try{
 CODE=code.trim(); MYID=name.trim();
 await rpc('colacoes_ler',{p_nome:MYID,p_senha:CODE});
-ls.set('col_code',CODE); 
-DB=dbAdapter; CAN=true; SYNC='on'; lastSig='';
+ls.set('col_code',CODE);
+DB=true; CAN=true; SYNC='on'; lastSig='';
 await poll(); render(); startPolling();
 }catch(e){
 DB=null; CAN=false; SYNC='off';
@@ -710,13 +1015,16 @@ render();
 function logout(msg){
 ls.del('col_code'); if(!msg){ location.reload(); return; }
 clearInterval(pollT); DB=null; CAN=false; SYNC='off'; CODE=''; lastSig=''; ls.del('col_code'); LOGIN_ERR=msg||'';
-CHK.forEach(it=>{ if(it.dirty){Object.assign(it,{status:it.st0,resp:'',lim:'',nota:'',by:null,at:null,dirty:false}); rehay(it);} });
-FES.forEach(f=>{ if(f.dirty){Object.assign(f,{st:f.st0,by:null,at:null,dirty:false}); rehayF(f);} });
+closeForm(); OV={chk:{},fes:{},ori:{},card:{},txt:{}}; rebuild();
 render();
 }
-document.addEventListener('submit',e=>{ if(e.target.id==='login'){ e.preventDefault(); login($('#lname').value,$('#lcode').value); } });
+document.addEventListener('submit',e=>{
+if(e.target.closest && e.target.closest('#modal')){ e.preventDefault(); submitForm(); return; }
+if(e.target.id==='login'){ e.preventDefault(); login($('#lname').value,$('#lcode').value); }
+});
 document.addEventListener('click',e=>{ if(e.target.closest('[data-logout]')) logout(''); });
 MYID = NAME0;
+rebuild();
 render();
 login(NAME0, CODE0);
 
