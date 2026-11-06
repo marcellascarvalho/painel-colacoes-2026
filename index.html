@@ -258,6 +258,8 @@ body.mopen{overflow:hidden}
 .mfoot .dng{border-color:var(--s-nao)}
 .merr{margin:0;font-weight:600}
 @media (max-width:600px){.mrow.kv3{grid-template-columns:minmax(0,1fr) auto}.mrow.kv3 .v{grid-column:1 / -1;order:3}.mrow.n2{grid-template-columns:minmax(0,1fr) auto}.mrow.n2 .l{grid-column:1 / -1;order:3}}
+.card .acts .ed.go.dng{border-color:var(--s-nao);color:var(--s-nao)}
+.item .ed+.ed{margin-left:0}
 </style>
 
 <div class="wrap lockbox" id="lock"><h1>Colações de fim de ano 2026</h1>
@@ -575,7 +577,7 @@ const nums = (boxes.length ? `<div class="nums">${boxes.map(([a,b])=>`<div><b>${
 const full = c.obs ? `<details><summary>${esc(c.obsT||'Observações')}</summary><p>${hl(c.obs)}</p></details>` : '';
 const attn = c.attn.length ? `<ul class="attn">${c.attn.map(a=>`<li>${hl(a)}</li>`).join('')}</ul>` : '';
 return `<article class="card"><h3>${hl(c.nome)}</h3><div class="when">${when}</div>${kv}${nums}${attn}${miniStatus(c.key)}${full}${whoLine(c,c.novo?'Criada/alterada':'Editada')}
-<div class="acts"><button class="go" data-go="${esc(c.key)}">Ver checklist desta colação</button><button class="go pdf" data-pdf="${esc(c.key)}">Gerar PDF da colação</button>${edBtn('edit','card',c.id,'Editar ficha','go')}</div></article>`;
+<div class="acts"><button class="go" data-go="${esc(c.key)}">Ver checklist desta colação</button><button class="go pdf" data-pdf="${esc(c.key)}">Gerar PDF da colação</button>${edBtn('edit','card',c.id,'Editar ficha','go')}${ED()?`<button type="button" class="ed go" data-act="newin" data-k="chk" data-id="${esc(c.key)}">+ Nova atividade</button>`:''}${edBtn('del','card',c.id,'Apagar colação','go dng')}</div></article>`;
 }
 function renderTrashCard(c){
 return `<article class="card off"><h3>${esc(c.nome||c.rot)}</h3><div class="when">${esc(c.quando)}</div><p class="note">Colação removida. Os itens do checklist dela continuam guardados.</p>
@@ -624,7 +626,7 @@ return `<h2>${S.trash?'Itens removidos':esc(T(8))+txtBtn(8)}</h2>${syncNote()}
 <select id="sort"><option value="planilha" ${S.sort==='planilha'?'selected':''}>Ordem da planilha</option><option value="pendencias" ${S.sort==='pendencias'?'selected':''}>Pendências primeiro</option></select>
 <button class="chip" data-urg="1" aria-pressed="${S.urg}">Só urgentes<span class="k">${S.urg?res.length:urgN}</span></button></div>
 </div>
-${trashBar('chk',nTr,'Novo item')}
+${trashBar('chk',nTr,'Nova atividade / tarefa')}
 <div class="resbar"><span>Mostrando <b>${res.length}</b> de ${chkPool().length} itens</span>${filtered?'<button class="linkbtn" data-reset="1">Limpar filtros e busca</button>':''}</div>
 ${res.length?`<div class="list">${res.map(renderItem).join('')}</div>`:'<div class="empty">Nenhum item com esses filtros. Tente limpar algum filtro ou mudar a busca.</div>'}`;
 }
@@ -647,7 +649,7 @@ return `<article class="item off"><div><span class="pill s-ori">Removido</span><
 }
 return `<article class="item"><div>${statusSelect(it.status,{cls:sCls(it.status),data:`data-l="${it.l}" data-f="status"`},STATUS.map(s=>s.k).filter(k=>k!=='Orientação informada'))}<span class="ref">${ref}</span>
 ${it.dirty?`<span class="ref">${it.novo?'Adicionado/alterado':'Alterado'} por ${esc(who(it.by))} em ${fmtAt(it.at)}${it.novo?'':`<button class="linkbtn undo" data-act="reset" data-k="chk" data-id="${it.l}" ${ro}>voltar ao original</button>`}</span>`:''}
-${edBtn('edit','chk',it.l,'Editar item')}</div>
+${edBtn('edit','chk',it.l,'Editar item')}${edBtn('del','chk',it.l,'Apagar item','dng')}</div>
 <div><p class="dem">${hl(it.dem)}</p>
 <p class="meta">${hl(it.turmaLbl)} · ${hl(it.cat)} · ${hl(it.etapa)}</p>
 ${showOrig?`<p class="orig">${hl(it.orig)}</p>`:''}
@@ -669,7 +671,7 @@ const f = filtFes(); const nTr = ALLFES.filter(x=>x.hid).length;
 return `<h2>${S.trash?'Alinhamentos removidos':esc(T(2))+txtBtn(2)}</h2>
 <p class="lead">${esc(T(3))}${txtBtn(3)}</p>${syncNote()}${trashBar('fes',nTr,'Novo alinhamento')}
 ${f.length?`<div class="fgrid">${f.map(x=> x.hid ? `<article class="fcard off"><h4><span>${hl(x.tema)}</span><span class="pill s-ori">Removido</span></h4><p>${hl(x.info)}</p><div class="fact">${edBtn('restore','fes',x.id,'Restaurar')}${x.novo?edBtn('purge','fes',x.id,'Excluir definitivamente','dng'):''}</div></article>`
-: `<article class="fcard"><h4><span>${hl(x.tema)}</span>${statusSelect(x.st,{cls:festSt(x.st),data:`data-fi="${x.id}"`},FES_OPTS)}</h4>${x.dirty?`<p class="ref">${x.novo?'Adicionado/alterado':'Alterado'} por ${esc(who(x.by))} em ${fmtAt(x.at)}${x.novo?'':`<button class="linkbtn undo" data-act="reset" data-k="fes" data-id="${x.id}" ${CAN&&DB?'':'disabled'}>voltar ao original</button>`}</p>`:''}<p>${hl(x.info)}</p><p class="obs">${hl(x.obs)}</p><div class="fact">${edBtn('edit','fes',x.id,'Editar')}</div></article>`).join('')}</div>`:'<div class="empty">Nenhum alinhamento da festiva corresponde à busca.</div>'}`;
+: `<article class="fcard"><h4><span>${hl(x.tema)}</span>${statusSelect(x.st,{cls:festSt(x.st),data:`data-fi="${x.id}"`},FES_OPTS)}</h4>${x.dirty?`<p class="ref">${x.novo?'Adicionado/alterado':'Alterado'} por ${esc(who(x.by))} em ${fmtAt(x.at)}${x.novo?'':`<button class="linkbtn undo" data-act="reset" data-k="fes" data-id="${x.id}" ${CAN&&DB?'':'disabled'}>voltar ao original</button>`}</p>`:''}<p>${hl(x.info)}</p><p class="obs">${hl(x.obs)}</p><div class="fact">${edBtn('edit','fes',x.id,'Editar')}${edBtn('del','fes',x.id,'Apagar','dng')}</div></article>`).join('')}</div>`:'<div class="empty">Nenhum alinhamento da festiva corresponde à busca.</div>'}`;
 }
 function vCapacidade(){
 const c = filtCap(); const rows = capRows();
@@ -687,7 +689,7 @@ return `<tr class="${x.total?'total':''}"><td>${hl(x.a)}</td><td>${hl(x.b||'—'
 function vOri(){
 const o = filtOri(); const nTr = ALLORI.filter(x=>x.hid).length;
 return `<h2>${S.trash?'Orientações removidas':esc(T(6))+txtBtn(6)}</h2><p class="lead">${esc(T(7))}${txtBtn(7)}</p>${trashBar('ori',nTr,'Nova orientação')}
-${o.length?`<div class="orilist">${o.map(x=>`<div class="orirow${x.hid?' off':''}"><p>${hl(x.t)}</p><div class="oact">${x.hid ? edBtn('restore','ori',x.id,'Restaurar')+(x.novo?edBtn('purge','ori',x.id,'Excluir definitivamente','dng'):'') : edBtn('edit','ori',x.id,'Editar')}</div></div>`).join('')}</div>`:'<div class="empty">Nenhuma orientação corresponde à busca.</div>'}`;
+${o.length?`<div class="orilist">${o.map(x=>`<div class="orirow${x.hid?' off':''}"><p>${hl(x.t)}</p><div class="oact">${x.hid ? edBtn('restore','ori',x.id,'Restaurar')+(x.novo?edBtn('purge','ori',x.id,'Excluir definitivamente','dng'):'') : edBtn('edit','ori',x.id,'Editar')+edBtn('del','ori',x.id,'Apagar','dng')}</div></div>`).join('')}</div>`:'<div class="empty">Nenhuma orientação corresponde à busca.</div>'}`;
 }
 
 /* ---------- relatório em PDF ---------- */
@@ -857,9 +859,9 @@ else if(k==='card'){ const fields=cardFields(false); cfg={title:'Editar ficha da
  onSave:d=>{ if(Object.keys(d).length) patch('card',r.id,d); }}; }
 openForm(cfg);
 }
-function newRec(k){
+function newRec(k,preset){
 if(!ED()) return;
-if(k==='chk'){ const fields=chkFields(); openForm({title:'Novo item no checklist',fields,vals:normVals(fields,{dem:'',cat:'',etapa:'',prazo:'',dt:'',orig:'',groups:S.group!=='Todas'?[S.group]:[]}),
+if(k==='chk'){ const fields=chkFields(); openForm({title:'Nova atividade / tarefa',fields,vals:normVals(fields,{dem:'',cat:'',etapa:'',prazo:'',dt:'',orig:'',groups:preset?[preset]:(S.group!=='Todas'?[S.group]:[])}),
  onSave:(d,v)=>patch('chk',newId('chk'),{...v,novo:1,status:'Não iniciado',ord:Date.now()})}); }
 else if(k==='fes'){ const fields=fesFields(true); openForm({title:'Novo alinhamento da festiva',fields,vals:normVals(fields,{tema:'',info:'',obs:'',st:'Pendente'}),
  onSave:(d,v)=>patch('fes',newId('fes'),{...v,novo:1,ord:Date.now()})}); }
@@ -893,6 +895,8 @@ onSave:df=>{ if(df.v!==undefined) patch('txt',id,{v:df.v}); }});
 function act(a,k,id){
 if(a==='edit') return editRec(k,id);
 if(a==='new') return newRec(k);
+if(a==='newin') return newRec(k,id);
+if(a==='del'){ const m={chk:'Apagar este item do checklist?',fes:'Apagar este alinhamento?',ori:'Apagar esta orientação?',card:'Apagar esta colação do painel? Os itens do checklist dela continuam guardados.'}; if(confirm(m[k]+' Ele vai para “Ver removidos” e pode ser restaurado.')) patch(k,+id,{hid:true}); return; }
 if(a==='txt') return editTxt(+id);
 if(a==='trash'){ S.trash=!S.trash; return render(); }
 if(a==='restore') return patch(k,+id,{hid:false});
