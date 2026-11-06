@@ -212,6 +212,10 @@ body::before{display:none!important}
 #report li{margin:2px 0}
 #report p{margin:4px 0}
 }
+.userbar{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:6px 12px;padding-top:12px;font-size:14px;color:var(--muted)}
+.userbar b{color:var(--fg);font-weight:600}
+.outbtn{font:inherit;font-size:13.5px;font-weight:600;padding:6px 14px;border-radius:8px;border:1.5px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer}
+.outbtn:hover{background:var(--accent);color:var(--accent-ink)}
 </style>
 
 <div class="wrap lockbox" id="lock"><h1>Colações de fim de ano 2026</h1>
@@ -220,6 +224,7 @@ body::before{display:none!important}
 <label>Senha<input id="kcode" type="password" autocomplete="current-password" required maxlength="40"></label>
 <button class="go2" type="submit">Entrar</button></div><span class="urg" id="kerr"></span></form></div>
 <div class="wrap" id="app" hidden>
+<div class="userbar" id="userbar" hidden><span id="whoami"></span><button class="outbtn" type="button" data-logout="1">Sair / trocar de usuário</button></div>
 <header class="top">
 <div>
 <h1>Colações de fim de ano 2026</h1>
@@ -576,7 +581,9 @@ function printReport(c){
   window.addEventListener('afterprint',back,{once:true});
   try{ window.print(); }catch(e){ back(); toast('Não foi possível abrir a impressão. Use Ctrl+P.'); }
 }
+function renderUser(){ const b=$('#userbar'); if(!b) return; if(MYID){ $('#whoami').innerHTML = DB ? 'Conectado como <b>'+esc(MYID)+'</b>' : '<b>'+esc(MYID)+'</b> (sem conexão para salvar)'; b.hidden=false; } else b.hidden=true; }
 function render(){
+renderUser();
 renderTotals();
 terms = norm(S.q).split(/\s+/).filter(Boolean);
 renderTabs();
